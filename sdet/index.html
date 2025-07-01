@@ -1,0 +1,2239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oscar Rieken - Principal SDET & Testing Framework Architect</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Monaco', 'Consolas', monospace;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+
+        /* Test Grid Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                    linear-gradient(rgba(34, 197, 94, 0.1) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(34, 197, 94, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            z-index: -1;
+            animation: grid-pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes grid-pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.1; }
+        }
+
+        /* Test Status Colors */
+        .pass { color: #22c55e; background: rgba(34, 197, 94, 0.1); }
+        .fail { color: #ef4444; background: rgba(239, 68, 68, 0.1); }
+        .warning { color: #f59e0b; background: rgba(245, 158, 11, 0.1); }
+        .info { color: #3b82f6; background: rgba(59, 130, 246, 0.1); }
+        .pending { color: #8b5cf6; background: rgba(139, 92, 246, 0.1); }
+
+        /* Hero Section - Test Suite Execution */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .terminal-window {
+            background: #000;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            border: 1px solid #22c55e;
+            max-width: 900px;
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #333;
+        }
+
+        .terminal-dots {
+            display: flex;
+            gap: 0.5rem;
+            margin-right: 1rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot.red { background: #ef4444; }
+        .dot.yellow { background: #f59e0b; }
+        .dot.green { background: #22c55e; }
+
+        .terminal-title {
+            color: #22c55e;
+            font-weight: 600;
+        }
+
+        .test-runner {
+            font-family: 'Monaco', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .test-line {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            animation: typewriter 0.1s ease-in;
+        }
+
+        .test-status {
+            margin-right: 1rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #22c55e, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #94a3b8;
+        }
+
+        /* Stats Dashboard */
+        .stats-dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+            max-width: 1000px;
+        }
+
+        .stat-card {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: #22c55e;
+            box-shadow: 0 10px 30px rgba(34, 197, 94, 0.2);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #22c55e;
+        }
+
+        .stat-label {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        /* Browser Grid */
+        .browser-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+            max-width: 500px;
+        }
+
+        .browser-card {
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid #334155;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .browser-card:hover {
+            border-color: #22c55e;
+            transform: scale(1.05);
+        }
+
+        .browser-card.active {
+            border-color: #22c55e;
+            background: rgba(34, 197, 94, 0.1);
+        }
+
+        .browser-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Framework Showcase */
+        .framework-section {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #22c55e;
+        }
+
+        .framework-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .framework-card {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid #334155;
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .framework-card:hover {
+            border-color: #22c55e;
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(34, 197, 94, 0.1);
+        }
+
+        .framework-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .framework-icon {
+            font-size: 2.5rem;
+            margin-right: 1rem;
+        }
+
+        .framework-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .code-demo {
+            background: #000;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: 'Monaco', monospace;
+            font-size: 0.85rem;
+            border-left: 4px solid #22c55e;
+            overflow-x: auto;
+        }
+
+        .demo-button {
+            background: linear-gradient(45deg, #22c55e, #16a34a);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 0.5rem 0;
+        }
+
+        .demo-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(34, 197, 94, 0.3);
+        }
+
+        /* CI/CD Pipeline */
+        .pipeline-section {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+
+        .pipeline-flow {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .pipeline-stage {
+            background: rgba(15, 23, 42, 0.8);
+            border: 2px solid #334155;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            position: relative;
+            min-width: 120px;
+            transition: all 0.3s ease;
+        }
+
+        .pipeline-stage.active {
+            border-color: #22c55e;
+            background: rgba(34, 197, 94, 0.1);
+            transform: scale(1.05);
+        }
+
+        .pipeline-stage.complete {
+            border-color: #22c55e;
+            background: rgba(34, 197, 94, 0.2);
+        }
+
+        .pipeline-arrow {
+            font-size: 1.5rem;
+            color: #22c55e;
+        }
+
+        /* Achievement Cards */
+        .achievements-section {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .achievement-card {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
+            border: 1px solid #22c55e;
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(34, 197, 94, 0.2);
+        }
+
+        .achievement-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .achievement-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #22c55e;
+        }
+
+        .achievement-desc {
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+
+        /* Interactive Test Console */
+        .test-console {
+            background: #000;
+            border-radius: 12px;
+            border: 1px solid #22c55e;
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+
+        .console-header {
+            background: #111;
+            padding: 1rem;
+            border-bottom: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .console-controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .console-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid #334155;
+            background: transparent;
+            color: #94a3b8;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .console-btn:hover {
+            border-color: #22c55e;
+            color: #22c55e;
+        }
+
+        .console-output {
+            padding: 1.5rem;
+            font-family: 'Monaco', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            text-align: center;
+        }
+
+        /* Experience Timeline Styles */
+        .experience-timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 4rem;
+        }
+
+        .timeline-badge {
+            position: absolute;
+            left: calc(50% - 25px);
+            top: -25px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 4px solid #0f172a;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-badge:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.5);
+        }
+
+        .experience-card {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid #334155;
+            border-radius: 16px;
+            padding: 2rem;
+            padding-top: 3rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experience-card:hover {
+            border-color: #22c55e;
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(34, 197, 94, 0.1);
+        }
+
+        .experience-card.current {
+            border-color: #22c55e;
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
+        }
+
+        .experience-card.founding {
+            border-color: #8b5cf6;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
+        }
+
+        .experience-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .job-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #22c55e;
+            margin-bottom: 0.5rem;
+        }
+
+        .company {
+            font-size: 1.2rem;
+            color: #3b82f6;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .duration {
+            color: #f59e0b;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .location {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .experience-description {
+            color: #e2e8f0;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            background: rgba(59, 130, 246, 0.2);
+            color: #3b82f6;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .tech-tag.ai {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+
+        .achievements-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .achievements-list li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #e2e8f0;
+            line-height: 1.5;
+        }
+
+        .achievements-list li::before {
+            content: attr(data-icon);
+            position: absolute;
+            left: 0;
+            color: #22c55e;
+        }
+
+        /* Education Styles */
+        .education-card {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid #334155;
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .education-card:hover {
+            border-color: #22c55e;
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(34, 197, 94, 0.1);
+        }
+
+        .education-card.current-education {
+            border-color: #22c55e;
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
+        }
+
+        .education-card.certification {
+            border-color: #3b82f6;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.05) 100%);
+        }
+
+        .education-card.military {
+            border-color: #ef4444;
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(245, 158, 11, 0.05) 100%);
+        }
+
+        .education-card.languages {
+            border-color: #8b5cf6;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(34, 197, 94, 0.05) 100%);
+        }
+
+        .education-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 80px;
+            height: 80px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            margin-bottom: 1rem;
+        }
+
+        .education-content {
+            flex: 1;
+        }
+
+        .degree-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #22c55e;
+            margin-bottom: 0.5rem;
+        }
+
+        .institution {
+            font-size: 1.1rem;
+            color: #3b82f6;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .status.in-progress {
+            background: rgba(245, 158, 11, 0.2);
+            color: #f59e0b;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .education-description {
+            color: #e2e8f0;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .coursework {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .course-tag {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .cert-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .skill-tag {
+            background: rgba(59, 130, 246, 0.2);
+            color: #3b82f6;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .military-values {
+            margin-top: 1rem;
+        }
+
+        .language-skills {
+            margin-top: 1rem;
+        }
+
+        .learning-philosophy {
+            margin-top: 2rem;
+        }
+
+        /* Timeline Responsive Design */
+        @media (max-width: 768px) {
+            .experience-timeline {
+                padding-left: 2rem;
+            }
+
+            .timeline-item {
+                margin-left: 0 !important;
+                width: calc(100% - 2rem) !important;
+            }
+
+            .timeline-badge {
+                left: -25px !important;
+            }
+
+            .education-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .education-badge {
+                align-self: center;
+                margin-bottom: 1rem;
+            }
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            text-align: center;
+        }
+
+        .contact-cta {
+            background: linear-gradient(45deg, #22c55e, #3b82f6);
+            padding: 2rem;
+            border-radius: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .contact-subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* Animations */
+        @keyframes typewriter {
+            from { opacity: 0; transform: translateX(-10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .pulse { animation: pulse 2s ease-in-out infinite; }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .hero-subtitle { font-size: 1.2rem; }
+            .stats-dashboard { grid-template-columns: repeat(2, 1fr); }
+            .browser-grid { grid-template-columns: repeat(2, 1fr); }
+            .framework-grid { grid-template-columns: 1fr; }
+            .pipeline-flow { flex-direction: column; }
+            .contact-info { flex-direction: column; }
+        }
+
+        @media (max-width: 480px) {
+            .stats-dashboard { grid-template-columns: 1fr; }
+            .browser-grid { grid-template-columns: 1fr; }
+            .hero { padding: 1rem; }
+            .framework-section, .pipeline-section, .achievements-section { padding: 2rem 1rem; }
+        }
+    </style>
+</head>
+<body>
+<!-- Hero Section - Test Suite Execution -->
+<section class="hero">
+    <div class="terminal-window">
+        <div class="terminal-header">
+            <div class="terminal-dots">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+            </div>
+            <div class="terminal-title">oscar-testing-suite v2.1.0</div>
+        </div>
+        <div class="test-runner" id="testRunner">
+            <div class="test-line">
+                <span class="test-status pass">PASS</span>
+                <span>✓ Cross-browser compatibility tests (Chrome, Firefox, Safari, Edge)</span>
+            </div>
+            <div class="test-line">
+                <span class="test-status pass">PASS</span>
+                <span>✓ Accessibility compliance (WCAG 2.1 AA)</span>
+            </div>
+            <div class="test-line">
+                <span class="test-status pass">PASS</span>
+                <span>✓ Performance benchmarks (Lighthouse 95+)</span>
+            </div>
+            <div class="test-line">
+                <span class="test-status pass">PASS</span>
+                <span>✓ API integration tests (RESTful & GraphQL)</span>
+            </div>
+            <div class="test-line">
+                <span class="test-status info">INFO</span>
+                <span>📊 Generating test coverage report... 98.5%</span>
+            </div>
+        </div>
+    </div>
+
+    <h1 class="hero-title">Oscar Rieken</h1>
+    <p class="hero-subtitle">Principal SDET | Testing Framework Architect | AI/ML Integration Specialist</p>
+
+    <div class="stats-dashboard">
+        <div class="stat-card">
+            <div class="stat-number" data-target="18">0</div>
+            <div class="stat-label">Years Testing Excellence</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" data-target="10000">0</div>
+            <div class="stat-label">Automated Tests Created</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" data-target="90">0</div>
+            <div class="stat-label">Teams Mentored</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" data-target="99.5">0</div>
+            <div class="stat-label">Framework Reliability %</div>
+        </div>
+    </div>
+
+    <div class="browser-grid">
+        <div class="browser-card active" data-browser="chrome">
+            <div class="browser-icon">🌐</div>
+            <div>Chrome</div>
+        </div>
+        <div class="browser-card" data-browser="firefox">
+            <div class="browser-icon">🦊</div>
+            <div>Firefox</div>
+        </div>
+        <div class="browser-card" data-browser="safari">
+            <div class="browser-icon">🧭</div>
+            <div>Safari</div>
+        </div>
+        <div class="browser-card" data-browser="edge">
+            <div class="browser-icon">🔷</div>
+            <div>Edge</div>
+        </div>
+    </div>
+</section>
+
+<!-- Testing Framework Expertise -->
+<section class="framework-section">
+    <h2 class="section-title">Testing Framework Mastery</h2>
+    <div class="framework-grid">
+        <div class="framework-card">
+            <div class="framework-header">
+                <div class="framework-icon">🎭</div>
+                <div>
+                    <div class="framework-name">Playwright</div>
+                    <div style="color: #94a3b8; font-size: 0.9rem;">Modern E2E Testing</div>
+                </div>
+            </div>
+            <div class="code-demo">
+                <span style="color: #f59e0b;">import</span> { <span style="color: #22c55e;">test</span>, <span style="color: #22c55e;">expect</span> } <span style="color: #f59e0b;">from</span> <span style="color: #3b82f6;">'@playwright/test'</span>;
+
+                <span style="color: #22c55e;">test</span>(<span style="color: #3b82f6;">'accessibility compliance'</span>, <span style="color: #f59e0b;">async</span> ({ <span style="color: #22c55e;">page</span> }) => {
+                <span style="color: #f59e0b;">await</span> page.goto(<span style="color: #3b82f6;">'https://myapp.com'</span>);
+                <span style="color: #f59e0b;">const</span> accessibilityScanResults = <span style="color: #f59e0b;">await</span> page.accessibility.snapshot();
+                expect(accessibilityScanResults).toHaveNoViolations();
+                });
+            </div>
+            <button class="demo-button" onclick="runPlaywrightDemo()">Run Playwright Demo</button>
+            <div style="margin-top: 1rem; color: #94a3b8; font-size: 0.9rem;">
+                ✅ Cross-browser testing<br>
+                ✅ Visual regression<br>
+                ✅ API testing integration<br>
+                ✅ Mobile device emulation
+            </div>
+        </div>
+
+        <div class="framework-card">
+            <div class="framework-header">
+                <div class="framework-icon">🌳</div>
+                <div>
+                    <div class="framework-name">Cypress</div>
+                    <div style="color: #94a3b8; font-size: 0.9rem;">Developer Experience</div>
+                </div>
+            </div>
+            <div class="code-demo">
+                <span style="color: #22c55e;">describe</span>(<span style="color: #3b82f6;">'User Authentication Flow'</span>, () => {
+                <span style="color: #22c55e;">it</span>(<span style="color: #3b82f6;">'should login and navigate dashboard'</span>, () => {
+                cy.visit(<span style="color: #3b82f6;">'/login'</span>);
+                cy.get(<span style="color: #3b82f6;">'[data-cy=username]'</span>).type(<span style="color: #3b82f6;">'testuser'</span>);
+                cy.get(<span style="color: #3b82f6;">'[data-cy=password]'</span>).type(<span style="color: #3b82f6;">'password123'</span>);
+                cy.get(<span style="color: #3b82f6;">'[data-cy=login-btn]'</span>).click();
+                cy.url().should(<span style="color: #3b82f6;">'include'</span>, <span style="color: #3b82f6;">'/dashboard'</span>);
+                });
+                });
+            </div>
+            <button class="demo-button" onclick="runCypressDemo()">Run Cypress Demo</button>
+            <div style="margin-top: 1rem; color: #94a3b8; font-size: 0.9rem;">
+                ✅ Real-time debugging<br>
+                ✅ Time-travel debugging<br>
+                ✅ Component testing<br>
+                ✅ Network stubbing
+            </div>
+        </div>
+
+        <div class="framework-card">
+            <div class="framework-header">
+                <div class="framework-icon">🚗</div>
+                <div>
+                    <div class="framework-name">Selenium</div>
+                    <div style="color: #94a3b8; font-size: 0.9rem;">Enterprise Scale</div>
+                </div>
+            </div>
+            <div class="code-demo">
+                <span style="color: #f59e0b;">public class</span> <span style="color: #22c55e;">CrossBrowserTest</span> {
+                <span style="color: #8b5cf6;">@Test</span>
+                <span style="color: #f59e0b;">public void</span> <span style="color: #22c55e;">testMultipleBrowsers</span>() {
+                WebDriver driver = <span style="color: #f59e0b;">new</span> ChromeDriver();
+                driver.get(<span style="color: #3b82f6;">"https://testapp.com"</span>);
+
+                WebElement loginBtn = driver.findElement(
+                By.xpath(<span style="color: #3b82f6;">"//button[@data-testid='login']"</span>)
+                );
+                loginBtn.click();
+
+                Assert.assertEquals(driver.getTitle(), <span style="color: #3b82f6;">"Dashboard"</span>);
+                }
+                }
+            </div>
+            <button class="demo-button" onclick="runSeleniumDemo()">Run Selenium Demo</button>
+            <div style="margin-top: 1rem; color: #94a3b8; font-size: 0.9rem;">
+                ✅ Grid architecture<br>
+                ✅ Multiple language support<br>
+                ✅ Parallel execution<br>
+                ✅ Remote testing
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CI/CD Pipeline Architecture -->
+<section class="pipeline-section">
+    <h2 class="section-title">CI/CD Pipeline Architecture</h2>
+
+    <div class="pipeline-flow">
+        <div class="pipeline-stage complete">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">📝</div>
+            <div>Code Commit</div>
+            <div style="font-size: 0.8rem; color: #94a3b8;">Git Hook Triggered</div>
+        </div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-stage complete">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏗️</div>
+            <div>Build</div>
+            <div style="font-size: 0.8rem; color: #94a3b8;">Docker Container</div>
+        </div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-stage active">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🧪</div>
+            <div>Test Suite</div>
+            <div style="font-size: 0.8rem; color: #94a3b8;">Parallel Execution</div>
+        </div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-stage">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔍</div>
+            <div>Quality Gates</div>
+            <div style="font-size: 0.8rem; color: #94a3b8;">Coverage Check</div>
+        </div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-stage">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🚀</div>
+            <div>Deploy</div>
+            <div style="font-size: 0.8rem; color: #94a3b8;">Production Ready</div>
+        </div>
+    </div>
+
+    <div class="test-console">
+        <div class="console-header">
+            <div style="color: #22c55e; font-weight: 600;">CI/CD Pipeline Monitor</div>
+            <div class="console-controls">
+                <button class="console-btn" onclick="triggerPipeline()">Trigger Pipeline</button>
+                <button class="console-btn" onclick="clearConsole()">Clear</button>
+                <button class="console-btn" onclick="showLogs()">View Logs</button>
+            </div>
+        </div>
+        <div class="console-output" id="consoleOutput">
+            <div style="color: #22c55e;">[2025-06-29 10:15:32] Pipeline initiated: oscar-testing-suite</div>
+            <div style="color: #3b82f6;">[2025-06-29 10:15:35] Building Docker image... ✓</div>
+            <div style="color: #f59e0b;">[2025-06-29 10:15:42] Running unit tests... 247 passed, 0 failed</div>
+            <div style="color: #f59e0b;">[2025-06-29 10:16:15] Running integration tests... 156 passed, 0 failed</div>
+            <div style="color: #8b5cf6;">[2025-06-29 10:16:48] Running E2E tests... 89 passed, 0 failed</div>
+            <div style="color: #22c55e;">[2025-06-29 10:17:20] All quality gates passed ✓</div>
+            <div style="color: #22c55e;">[2025-06-29 10:17:25] Deployment successful ✓</div>
+        </div>
+    </div>
+</section>
+
+<!-- Key Achievements -->
+<section class="achievements-section">
+    <h2 class="section-title">Testing Excellence Achievements</h2>
+    <div class="achievements-grid">
+        <div class="achievement-card">
+            <div class="achievement-icon">🏆</div>
+            <div class="achievement-title">Enterprise Transformation</div>
+            <div class="achievement-desc">
+                Led 90+ product teams through automation transformation at ADP, reducing deployment time by 60%
+                and establishing quality standards that contributed to top 5 app store rankings.
+            </div>
+        </div>
+
+        <div class="achievement-card">
+            <div class="achievement-icon">🤖</div>
+            <div class="achievement-title">AI-Powered Testing Innovation</div>
+            <div class="achievement-desc">
+                Pioneered ML-driven test analytics with RAG models and GPT integration, creating intelligent
+                dashboards that predict failures and automate remediation workflows.
+            </div>
+        </div>
+
+        <div class="achievement-card">
+            <div class="achievement-icon">🔄</div>
+            <div class="achievement-title">Framework Migration Excellence</div>
+            <div class="achievement-desc">
+                Successfully orchestrated enterprise-wide migration from Protractor to Cypress/Playwright,
+                maintaining zero downtime while improving test reliability and cross-browser compatibility.
+            </div>
+        </div>
+
+        <div class="achievement-card">
+            <div class="achievement-icon">♿</div>
+            <div class="achievement-title">Accessibility Champion</div>
+            <div class="achievement-desc">
+                Integrated automated accessibility testing using Playwright + Axe, ensuring WCAG 2.1 AA
+                compliance and contributing to mobile apps reaching top 5 business applications.
+            </div>
+        </div>
+
+        <div class="achievement-card">
+            <div class="achievement-icon">📊</div>
+            <div class="achievement-title">Quality Metrics Mastery</div>
+            <div class="achievement-desc">
+                Established standardized quality gates with SonarQube, achieving 99.5% framework reliability
+                and 98.5% test coverage across enterprise applications.
+            </div>
+        </div>
+
+        <div class="achievement-card">
+            <div class="achievement-icon">🎯</div>
+            <div class="achievement-title">Mentorship Leadership</div>
+            <div class="achievement-desc">
+                Mentored 90+ product teams and 12 SDETs, creating comprehensive SDET playbooks and
+                onboarding curricula that elevated coding standards across organizations.
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Interactive Testing Demonstrations -->
+<section class="framework-section">
+    <h2 class="section-title">Interactive Testing Playground</h2>
+
+    <div class="framework-grid">
+        <div class="framework-card">
+            <div class="framework-header">
+                <div class="framework-icon">🧪</div>
+                <div>
+                    <div class="framework-name">Live Test Execution</div>
+                    <div style="color: #94a3b8; font-size: 0.9rem;">Multi-Framework Comparison</div>
+                </div>
+            </div>
+
+            <div style="margin: 1rem 0;">
+                <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                    <button class="console-btn test-framework-btn active" data-framework="playwright">Playwright</button>
+                    <button class="console-btn test-framework-btn" data-framework="cypress">Cypress</button>
+                    <button class="console-btn test-framework-btn" data-framework="selenium">Selenium</button>
+                </div>
+
+                <div class="test-demo-area">
+                    <div class="demo-metrics">
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1rem;">
+                            <div style="text-align: center; padding: 0.5rem; background: rgba(34, 197, 94, 0.1); border-radius: 8px;">
+                                <div style="color: #22c55e; font-size: 1.5rem; font-weight: 600;" id="executionTime">2.3s</div>
+                                <div style="color: #94a3b8; font-size: 0.8rem;">Execution Time</div>
+                            </div>
+                            <div style="text-align: center; padding: 0.5rem; background: rgba(59, 130, 246, 0.1); border-radius: 8px;">
+                                <div style="color: #3b82f6; font-size: 1.5rem; font-weight: 600;" id="testsPassed">27/27</div>
+                                <div style="color: #94a3b8; font-size: 0.8rem;">Tests Passed</div>
+                            </div>
+                            <div style="text-align: center; padding: 0.5rem; background: rgba(245, 158, 11, 0.1); border-radius: 8px;">
+                                <div style="color: #f59e0b; font-size: 1.5rem; font-weight: 600;" id="coverage">98.5%</div>
+                                <div style="color: #94a3b8; font-size: 0.8rem;">Coverage</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="test-console">
+                        <div class="console-header">
+                            <div style="color: #22c55e; font-weight: 600;" id="activeFramework">Playwright Test Runner</div>
+                            <div class="console-controls">
+                                <button class="console-btn" onclick="runTestSuite()">Run Tests</button>
+                                <button class="console-btn" onclick="stopTests()">Stop</button>
+                            </div>
+                        </div>
+                        <div class="console-output" id="testConsoleOutput">
+                            <div style="color: #3b82f6;">[INFO] Initializing Playwright test suite...</div>
+                            <div style="color: #22c55e;">[PASS] ✓ Login form validation</div>
+                            <div style="color: #22c55e;">[PASS] ✓ Cross-browser compatibility</div>
+                            <div style="color: #22c55e;">[PASS] ✓ Accessibility compliance</div>
+                            <div style="color: #22c55e;">[PASS] ✓ Performance benchmarks</div>
+                            <div style="color: #f59e0b;">[INFO] Generating coverage report...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="framework-card">
+            <div class="framework-header">
+                <div class="framework-icon">🔍</div>
+                <div>
+                    <div class="framework-name">Quality Analysis Dashboard</div>
+                    <div style="color: #94a3b8; font-size: 0.9rem;">Real-time Metrics</div>
+                </div>
+            </div>
+
+            <div class="quality-dashboard">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+                    <div style="background: rgba(0, 0, 0, 0.3); padding: 1rem; border-radius: 8px;">
+                        <div style="color: #22c55e; font-size: 1.2rem; font-weight: 600;">Test Health</div>
+                        <div style="margin: 0.5rem 0;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                                <span style="color: #94a3b8;">Stability</span>
+                                <span style="color: #22c55e;">99.2%</span>
+                            </div>
+                            <div style="background: #334155; height: 4px; border-radius: 2px;">
+                                <div style="background: #22c55e; height: 100%; width: 99.2%; border-radius: 2px;"></div>
+                            </div>
+                        </div>
+                        <div style="margin: 0.5rem 0;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                                <span style="color: #94a3b8;">Performance</span>
+                                <span style="color: #22c55e;">96.8%</span>
+                            </div>
+                            <div style="background: #334155; height: 4px; border-radius: 2px;">
+                                <div style="background: #22c55e; height: 100%; width: 96.8%; border-radius: 2px;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background: rgba(0, 0, 0, 0.3); padding: 1rem; border-radius: 8px;">
+                        <div style="color: #3b82f6; font-size: 1.2rem; font-weight: 600;">Coverage Trends</div>
+                        <div style="margin: 0.5rem 0;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                                <span style="color: #94a3b8;">Unit Tests</span>
+                                <span style="color: #3b82f6;">98.5%</span>
+                            </div>
+                            <div style="background: #334155; height: 4px; border-radius: 2px;">
+                                <div style="background: #3b82f6; height: 100%; width: 98.5%; border-radius: 2px;"></div>
+                            </div>
+                        </div>
+                        <div style="margin: 0.5rem 0;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                                <span style="color: #94a3b8;">Integration</span>
+                                <span style="color: #3b82f6;">94.2%</span>
+                            </div>
+                            <div style="background: #334155; height: 4px; border-radius: 2px;">
+                                <div style="background: #3b82f6; height: 100%; width: 94.2%; border-radius: 2px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: rgba(0, 0, 0, 0.3); padding: 1rem; border-radius: 8px;">
+                    <div style="color: #f59e0b; font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem;">Recent Test Runs</div>
+                    <div style="font-size: 0.85rem; font-family: 'Monaco', monospace;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span>🟢 PR #1247 - Feature/user-auth</span>
+                            <span style="color: #94a3b8;">2 mins ago</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span>🟢 PR #1245 - Fix/payment-flow</span>
+                            <span style="color: #94a3b8;">8 mins ago</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span>🟡 PR #1243 - Update/dependencies</span>
+                            <span style="color: #94a3b8;">15 mins ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Technical Skills & Tools -->
+<section class="pipeline-section">
+    <h2 class="section-title">Technical Arsenal</h2>
+
+    <div style="max-width: 1200px; margin: 0 auto;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+            <div class="framework-card">
+                <div class="framework-header">
+                    <div class="framework-icon">⚙️</div>
+                    <div>
+                        <div class="framework-name">Automation Frameworks</div>
+                    </div>
+                </div>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;">
+                    <span style="background: #22c55e; color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.8rem;">Playwright</span>
+                    <span style="background: #22c55e; color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.8rem;">Cypress</span>
+                    <span style="background: #22c55e; color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.8rem;">Selenium</span>
+                    <span style="background: #3b82f6; color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.8rem;">WebDriver</span>
+                    <span style="background: #3b82f6; color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.8rem;">Cucumber</span>
+                    <span style="background: #8b5cf6; color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.8rem;">TestNG</span>
+                </div>
+            </div>
+
+            <div class="framework-card">
+                <div class="framework-header">
+                    <div class="framework-icon">🏗️</div>
+                    <div>
+                        <div class="framework-name">CI/CD & DevOps</div>
+                    </div>
+                </div>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;">
+                    <span style="background: #22c55e; color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.8rem;">Jenkins</span>
+                    <span style="background: #22c55e; color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.8rem;">GitHub Actions</span>
+                    <span style="background: #3b82f6; color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.8rem;">Docker</span>
+                    <span style="background: #3b82f6; color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.8rem;">Kubernetes</span>
+                    <span style="background: #f59e0b; color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.8rem;">GitLab CI</span>
+                    <span style="background: #8b5cf6; color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.8rem;">CircleCI</span>
+                </div>
+            </div>
+
+            <div class="framework-card">
+                <div class="framework-header">
+                    <div class="framework-icon">🧠</div>
+                    <div>
+                        <div class="framework-name">AI/ML & Analytics</div>
+                    </div>
+                </div>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;">
+                    <span style="background: #ef4444; color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.8rem;">RAG Models</span>
+                    <span style="background: #ef4444; color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.8rem;">GPT Integration</span>
+                    <span style="background: #f59e0b; color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.8rem;">Prometheus</span>
+                    <span style="background: #f59e0b; color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.8rem;">Grafana</span>
+                    <span style="background: #8b5cf6; color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.8rem;">Ollama</span>
+                    <span style="background: #8b5cf6; color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.8rem;">TensorFlow</span>
+                </div>
+            </div>
+
+            <div class="framework-card">
+                <div class="framework-header">
+                    <div class="framework-icon">💻</div>
+                    <div>
+                        <div class="framework-name">Programming Languages</div>
+                    </div>
+                </div>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;">
+                    <span style="background: #22c55e; color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.8rem;">JavaScript (10+yrs)</span>
+                    <span style="background: #22c55e; color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.8rem;">TypeScript</span>
+                    <span style="background: #22c55e; color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.8rem;">Ruby (10+yrs)</span>
+                    <span style="background: #3b82f6; color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.8rem;">Python</span>
+                    <span style="background: #3b82f6; color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.8rem;">Java</span>
+                    <span style="background: #f59e0b; color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.8rem;">Go</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Professional Experience Timeline -->
+<section class="framework-section">
+    <h2 class="section-title">Professional Experience Timeline</h2>
+
+    <div style="max-width: 1000px; margin: 0 auto; position: relative;">
+        <!-- Timeline Line -->
+        <div style="position: absolute; left: 50%; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, #22c55e, #3b82f6); transform: translateX(-50%); z-index: 1;"></div>
+
+        <!-- Experience Items -->
+        <div class="experience-timeline">
+            <!-- Current Position -->
+            <div class="timeline-item" style="margin-left: 0; width: calc(50% - 30px);">
+                <div class="timeline-badge" style="background: #22c55e;">
+                    <span style="font-size: 1.2rem;">🚀</span>
+                </div>
+                <div class="experience-card current">
+                    <div class="experience-header">
+                        <div class="job-title">Principal SDET</div>
+                        <div class="company">Rieken Consulting</div>
+                        <div class="duration">August 2023 - Present</div>
+                        <div class="location">Remote</div>
+                    </div>
+                    <div class="experience-description">
+                        Leading AI/ML integration initiatives for modern testing frameworks, developing bespoke automation solutions with intelligent analytics.
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag ai">RAG Models</span>
+                        <span class="tech-tag ai">GPT Integration</span>
+                        <span class="tech-tag">Playwright</span>
+                        <span class="tech-tag">Grafana</span>
+                        <span class="tech-tag">Prometheus</span>
+                    </div>
+                    <ul class="achievements-list">
+                        <li>🤖 Architected ML-powered testing platform with intelligent failure prediction</li>
+                        <li>📊 Built unified dashboards integrating Prometheus, Ollama, and MS Teams bots</li>
+                        <li>👥 Mentored 7 development teams and 4 SDETs in advanced automation strategies</li>
+                        <li>📚 Created comprehensive SDET playbook and onboarding curriculum</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ADP Experience -->
+            <div class="timeline-item" style="margin-left: calc(50% + 30px); width: calc(50% - 30px);">
+                <div class="timeline-badge" style="background: #3b82f6;">
+                    <span style="font-size: 1.2rem;">🏢</span>
+                </div>
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <div class="job-title">Principal SDET</div>
+                        <div class="company">ADP</div>
+                        <div class="duration">June 2016 - August 2023</div>
+                        <div class="location">Alpharetta, GA</div>
+                    </div>
+                    <div class="experience-description">
+                        Principal Software Architect for MyADP Product ecosystem, driving Continuous Delivery adoption across 90+ teams.
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Cypress</span>
+                        <span class="tech-tag">Playwright</span>
+                        <span class="tech-tag">Jenkins</span>
+                        <span class="tech-tag">SonarQube</span>
+                        <span class="tech-tag">Axe</span>
+                    </div>
+                    <ul class="achievements-list">
+                        <li>🎯 Influenced 90+ product teams and mentored 12 SDETs directly</li>
+                        <li>🔄 Led Protractor → Cypress/Playwright migration enterprise-wide</li>
+                        <li>♿ Implemented accessibility testing contributing to top 5 app store rankings</li>
+                        <li>🤖 Developed WebEx bots for automated deployment workflows</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Home Depot Experience -->
+            <div class="timeline-item" style="margin-left: 0; width: calc(50% - 30px);">
+                <div class="timeline-badge" style="background: #f59e0b;">
+                    <span style="font-size: 1.2rem;">🏠</span>
+                </div>
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <div class="job-title">Lead Software Engineer</div>
+                        <div class="company">The Home Depot</div>
+                        <div class="duration">June 2015 - March 2017</div>
+                        <div class="location">Vinings, GA</div>
+                    </div>
+                    <div class="experience-description">
+                        Led engineering teams through TDD/BDD adoption and proprietary framework migration to AngularJS.
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">AngularJS</span>
+                        <span class="tech-tag">TDD/BDD</span>
+                        <span class="tech-tag">CI/CD</span>
+                        <span class="tech-tag">JavaScript</span>
+                    </div>
+                    <ul class="achievements-list">
+                        <li>👥 Mentored 5 engineers in automation excellence and clean coding practices</li>
+                        <li>📋 Created strategic automation blueprint for incremental delivery</li>
+                        <li>📊 Delivered comprehensive dashboards for test coverage tracking</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- IONIC Security Experience -->
+            <div class="timeline-item" style="margin-left: calc(50% + 30px); width: calc(50% - 30px);">
+                <div class="timeline-badge" style="background: #8b5cf6;">
+                    <span style="font-size: 1.2rem;">🔒</span>
+                </div>
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <div class="job-title">Lead SDET</div>
+                        <div class="company">IONIC Security</div>
+                        <div class="duration">April 2014 - June 2015</div>
+                        <div class="location">Atlanta, GA</div>
+                    </div>
+                    <div class="experience-description">
+                        Built greenfield automation framework and led infrastructure automation initiatives.
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Docker</span>
+                        <span class="tech-tag">Vagrant</span>
+                        <span class="tech-tag">Packer</span>
+                        <span class="tech-tag">Automation</span>
+                    </div>
+                    <ul class="achievements-list">
+                        <li>🏗️ Built comprehensive automation framework from ground up</li>
+                        <li>🚀 Introduced deployment automation and infrastructure monitoring</li>
+                        <li>⚡ Aligned development and QA teams on shared sprint cadences</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Manheim Experience -->
+            <div class="timeline-item" style="margin-left: 0; width: calc(50% - 30px);">
+                <div class="timeline-badge" style="background: #ef4444;">
+                    <span style="font-size: 1.2rem;">🚗</span>
+                </div>
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <div class="job-title">Lead QA Analyst</div>
+                        <div class="company">Manheim</div>
+                        <div class="duration">January 2012 - April 2014</div>
+                        <div class="location">Atlanta, GA</div>
+                    </div>
+                    <div class="experience-description">
+                        Managed 15 automation engineers globally, building sustainable frameworks for complex systems.
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Ruby</span>
+                        <span class="tech-tag">Selenium</span>
+                        <span class="tech-tag">Mobile Testing</span>
+                        <span class="tech-tag">Performance</span>
+                    </div>
+                    <ul class="achievements-list">
+                        <li>🌍 Managed 15 automation engineers across onshore/offshore teams</li>
+                        <li>📱 Built functional and performance frameworks for browser and mobile</li>
+                        <li>⬆️ Upskilled manual testers into automation specialists</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ThoughtWorks Experience -->
+            <div class="timeline-item" style="margin-left: calc(50% + 30px); width: calc(50% - 30px);">
+                <div class="timeline-badge" style="background: #22c55e;">
+                    <span style="font-size: 1.2rem;">💭</span>
+                </div>
+                <div class="experience-card founding">
+                    <div class="experience-header">
+                        <div class="job-title">Lead QA Analyst</div>
+                        <div class="company">ThoughtWorks</div>
+                        <div class="duration">July 2006 - December 2011</div>
+                        <div class="location">Global</div>
+                    </div>
+                    <div class="experience-description">
+                        Built foundational automation frameworks and created open-source plugins for Watir and Selenium-WebDriver.
+                    </div>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Watir</span>
+                        <span class="tech-tag">Selenium</span>
+                        <span class="tech-tag">Ruby</span>
+                        <span class="tech-tag">Open Source</span>
+                    </div>
+                    <ul class="achievements-list">
+                        <li>🛠️ Created foundational automation frameworks and reusable plugins</li>
+                        <li>🔗 Led QA initiatives across multiple agile teams globally</li>
+                        <li>📊 Established project-specific templates for automated regression testing</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Education & Continuous Learning -->
+<section class="achievements-section">
+    <h2 class="section-title">Education & Continuous Learning</h2>
+    <div class="achievements-grid">
+        <div class="achievement-card">
+            <div class="achievement-icon">🧠</div>
+            <div class="achievement-title">Master's in AI/ML</div>
+            <div class="achievement-desc">
+                <strong>Heriot-Watt University</strong><br>
+                <span style="color: #f59e0b;">In Progress - Expected 2025</span><br><br>
+                Advanced studies in machine learning algorithms, neural networks, and AI applications in software engineering and testing automation.
+                <br><br>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;">
+                    <span style="background: rgba(34, 197, 94, 0.2); color: #22c55e; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.8rem;">Machine Learning</span>
+                    <span style="background: rgba(34, 197, 94, 0.2); color: #22c55e; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.8rem;">Neural Networks</span>
+                    <span style="background: rgba(34, 197, 94, 0.2); color: #22c55e; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.8rem;">AI Ethics</span>
+                    <span style="background: rgba(34, 197, 94, 0.2); color: #22c55e; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.8rem;">Data Science</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="achievement-card">
+            <div class="achievement-icon">💻</div>
+            <div class="achievement-title">IBM Full Stack Developer</div>
+            <div class="achievement-desc">
+                <strong>IBM Professional Certificate</strong><br>
+                <span style="color: #f59e0b;">In Progress - March 2025</span><br><br>
+                Comprehensive full-stack development program covering modern web technologies, cloud platforms, and DevOps practices.
+                <br><br>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;">
+                    <span style="background: rgba(59, 130, 246, 0.2); color: #3b82f6; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.8rem;">React</span>
+                    <span style="background: rgba(59, 130, 246, 0.2); color: #3b82f6; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.8rem;">Node.js</span>
+                    <span style="background: rgba(59, 130, 246, 0.2); color: #3b82f6; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.8rem;">Python</span>
+                    <span style="background: rgba(59, 130, 246, 0.2); color: #3b82f6; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.8rem;">Docker</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="achievement-card">
+            <div class="achievement-icon">🤖</div>
+            <div class="achievement-title">IBM AI Developer</div>
+            <div class="achievement-desc">
+                <strong>IBM Professional Certificate</strong><br>
+                <span style="color: #f59e0b;">In Progress - March 2025</span><br><br>
+                Advanced AI development certification focusing on machine learning, deep learning, and MLOps practices for production AI systems.
+                <br><br>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;">
+                    <span style="background: rgba(139, 92, 246, 0.2); color: #8b5cf6; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.8rem;">TensorFlow</span>
+                    <span style="background: rgba(139, 92, 246, 0.2); color: #8b5cf6; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.8rem;">PyTorch</span>
+                    <span style="background: rgba(139, 92, 246, 0.2); color: #8b5cf6; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.8rem;">NLP</span>
+                    <span style="background: rgba(139, 92, 246, 0.2); color: #8b5cf6; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.8rem;">MLOps</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="achievement-card">
+            <div class="achievement-icon">🇺🇸</div>
+            <div class="achievement-title">Military Leadership</div>
+            <div class="achievement-desc">
+                <strong>United States Marine Corps</strong><br>
+                <span style="color: #ef4444;">Honorable Service</span><br><br>
+                Military discipline and leadership experience contributing to exceptional project management, team coordination, and crisis response capabilities.
+                <br><br>
+                <div style="margin-top: 1rem; color: #94a3b8;">
+                    <strong>Core Values:</strong> Honor, Courage, Commitment<br>
+                    <strong>Leadership Skills:</strong> Team Management, Strategic Planning, Crisis Response
+                </div>
+            </div>
+        </div>
+
+        <div class="achievement-card">
+            <div class="achievement-icon">🌍</div>
+            <div class="achievement-title">Multilingual Expertise</div>
+            <div class="achievement-desc">
+                <strong>Global Communication Skills</strong><br>
+                <span style="color: #22c55e;">Fluent Multilingual Capabilities</span><br><br>
+                International communication skills enabling effective collaboration with global development teams and diverse stakeholders.
+                <br><br>
+                <div style="margin-top: 1rem;">
+                    <div style="margin: 0.5rem 0;">
+                        <span style="color: #22c55e; font-weight: 600;">Spanish</span>
+                        <span style="color: #94a3b8;"> - Fluent</span>
+                    </div>
+                    <div style="margin: 0.5rem 0;">
+                        <span style="color: #3b82f6; font-weight: 600;">Portuguese</span>
+                        <span style="color: #94a3b8;"> - Intermediate</span>
+                    </div>
+                    <div style="margin: 0.5rem 0;">
+                        <span style="color: #8b5cf6; font-weight: 600;">English</span>
+                        <span style="color: #94a3b8;"> - Native</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="achievement-card">
+            <div class="achievement-icon">📚</div>
+            <div class="achievement-title">Continuous Learning Philosophy</div>
+            <div class="achievement-desc">
+                <strong>Lifelong Learning Commitment</strong><br>
+                <span style="color: #3b82f6;">Always Evolving, Always Growing</span><br><br>
+                "Technology evolves rapidly, and staying ahead requires continuous learning and adaptation. My commitment to ongoing education ensures I can leverage cutting-edge tools and methodologies to solve complex testing challenges and drive innovation in quality assurance."
+                <br><br>
+                <div style="margin-top: 1rem; color: #94a3b8;">
+                    <strong>Current Focus:</strong> AI/ML Integration in Testing Frameworks
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact & Call-to-Action -->
+<section class="contact-section">
+    <div class="contact-cta">
+        <h2 class="contact-title">Ready to Transform Your Testing Strategy?</h2>
+        <p class="contact-subtitle">
+            Let's collaborate on building robust, AI-powered automation frameworks that accelerate delivery
+            while maintaining exceptional quality standards.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 2rem 0;">
+            <button class="demo-button" onclick="scheduleConsultation()">
+                📅 Schedule QA Consultation
+            </button>
+            <button class="demo-button" onclick="viewPortfolio()">
+                🔍 Explore Framework Code
+            </button>
+            <button class="demo-button" onclick="downloadGuides()">
+                📚 Download Testing Guides
+            </button>
+        </div>
+
+        <div class="contact-info">
+            <div class="contact-item">
+                <span>📧</span>
+                <span>oriekenjr@gmail.com</span>
+            </div>
+            <div class="contact-item">
+                <span>📱</span>
+                <span>+1 504 723 4720</span>
+            </div>
+            <div class="contact-item">
+                <span>📍</span>
+                <span>New Orleans, LA | Butler, PA</span>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-top: 3rem; text-align: center; color: #94a3b8;">
+        <div style="font-size: 1.1rem; margin-bottom: 1rem;">
+            <strong>"Being a hyperglot allows me to use the right tool for the right job.
+                Great leaders stay in the trenches with emerging tech and help solve the big problems."</strong>
+        </div>
+        <div style="font-size: 0.9rem;">
+            18+ Years of Testing Excellence | Former US Marine Corps | Currently pursuing MS in AI/ML
+        </div>
+    </div>
+</section>
+
+<script>
+  // Animated Statistics Counter
+  function animateStats() {
+    const stats = document.querySelectorAll('[data-target]');
+    stats.forEach(stat => {
+      const target = parseFloat(stat.getAttribute('data-target'));
+      const isDecimal = target % 1 !== 0;
+      let current = 0;
+      const increment = target / 100;
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          current = target;
+          clearInterval(timer);
+        }
+        stat.textContent = isDecimal ? current.toFixed(1) : Math.floor(current);
+      }, 30);
+    });
+  }
+
+  // Browser Selection Interaction
+  document.querySelectorAll('.browser-card').forEach(card => {
+    card.addEventListener('click', function() {
+      document.querySelectorAll('.browser-card').forEach(c => c.classList.remove('active'));
+      this.classList.add('active');
+      updateTestRunner(this.dataset.browser);
+    });
+  });
+
+  function updateTestRunner(browser) {
+    const testRunner = document.getElementById('testRunner');
+    const browserTests = {
+      chrome: [
+        { status: 'pass', text: '✓ Chrome DevTools integration tests' },
+        { status: 'pass', text: '✓ V8 JavaScript engine compatibility' },
+        { status: 'pass', text: '✓ Lighthouse performance metrics' }
+      ],
+      firefox: [
+        { status: 'pass', text: '✓ Gecko engine rendering tests' },
+        { status: 'pass', text: '✓ Firefox Developer Tools integration' },
+        { status: 'warning', text: '⚠ CSS Grid layout differences detected' }
+      ],
+      safari: [
+        { status: 'pass', text: '✓ WebKit engine compatibility' },
+        { status: 'pass', text: '✓ iOS Safari viewport tests' },
+        { status: 'info', text: 'ℹ Safari-specific feature testing' }
+      ],
+      edge: [
+        { status: 'pass', text: '✓ Chromium-based Edge compatibility' },
+        { status: 'pass', text: '✓ EdgeHTML legacy support' },
+        { status: 'pass', text: '✓ Microsoft ecosystem integration' }
+      ]
+    };
+
+    testRunner.innerHTML = '';
+    browserTests[browser].forEach((test, index) => {
+      setTimeout(() => {
+        const testLine = document.createElement('div');
+        testLine.className = 'test-line';
+        testLine.innerHTML = `
+                        <span class="test-status ${test.status}">${test.status.toUpperCase()}</span>
+                        <span>${test.text}</span>
+                    `;
+        testRunner.appendChild(testLine);
+      }, index * 300);
+    });
+  }
+
+  // Framework Demo Functions
+  function runPlaywrightDemo() {
+    showTestExecution('Playwright', [
+      'Launching headless Chrome...',
+      'Setting viewport to 1920x1080...',
+      'Running accessibility scan with axe-core...',
+      'Capturing screenshots for visual regression...',
+      'All tests passed! ✓'
+    ]);
+  }
+
+  function runCypressDemo() {
+    showTestExecution('Cypress', [
+      'Opening Cypress Test Runner...',
+      'Loading application in test environment...',
+      'Recording test execution video...',
+      'Time-travel debugging enabled...',
+      'Test suite completed successfully! ✓'
+    ]);
+  }
+
+  function runSeleniumDemo() {
+    showTestExecution('Selenium', [
+      'Initializing WebDriver Grid...',
+      'Connecting to remote browser instances...',
+      'Running parallel test execution...',
+      'Generating TestNG reports...',
+      'Grid execution completed! ✓'
+    ]);
+  }
+
+  function showTestExecution(framework, steps) {
+    const button = event.target;
+    const originalText = button.textContent;
+    button.textContent = 'Running...';
+    button.disabled = true;
+
+    steps.forEach((step, index) => {
+      setTimeout(() => {
+        console.log(`[${framework}] ${step}`);
+        if (index === steps.length - 1) {
+          setTimeout(() => {
+            button.textContent = originalText;
+            button.disabled = false;
+          }, 500);
+        }
+      }, index * 800);
+    });
+  }
+
+  // Test Framework Switching
+  document.querySelectorAll('.test-framework-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.test-framework-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+
+      const framework = this.dataset.framework;
+      updateFrameworkDemo(framework);
+    });
+  });
+
+  function updateFrameworkDemo(framework) {
+    const metrics = {
+      playwright: { time: '2.3s', tests: '27/27', coverage: '98.5%' },
+      cypress: { time: '3.1s', tests: '24/24', coverage: '96.2%' },
+      selenium: { time: '4.7s', tests: '31/31', coverage: '94.8%' }
+    };
+
+    const frameworkData = metrics[framework];
+    document.getElementById('executionTime').textContent = frameworkData.time;
+    document.getElementById('testsPassed').textContent = frameworkData.tests;
+    document.getElementById('coverage').textContent = frameworkData.coverage;
+    document.getElementById('activeFramework').textContent = `${framework.charAt(0).toUpperCase() + framework.slice(1)} Test Runner`;
+  }
+
+  // Pipeline Simulation
+  function triggerPipeline() {
+    const stages = document.querySelectorAll('.pipeline-stage');
+    const output = document.getElementById('consoleOutput');
+
+    output.innerHTML = '<div style="color: #3b82f6;">[INFO] Pipeline triggered manually...</div>';
+
+    stages.forEach((stage, index) => {
+      setTimeout(() => {
+        stage.classList.remove('complete', 'active');
+        stage.classList.add('active');
+
+        const stageName = stage.querySelector('div:nth-child(2)').textContent;
+        output.innerHTML += `<div style="color: #f59e0b;">[RUNNING] Executing ${stageName}...</div>`;
+
+        setTimeout(() => {
+          stage.classList.remove('active');
+          stage.classList.add('complete');
+          output.innerHTML += `<div style="color: #22c55e;">[SUCCESS] ${stageName} completed ✓</div>`;
+
+          if (index === stages.length - 1) {
+            output.innerHTML += '<div style="color: #22c55e;">[INFO] Pipeline completed successfully! 🚀</div>';
+          }
+        }, 1500);
+      }, index * 2000);
+    });
+  }
+
+  function runTestSuite() {
+    const output = document.getElementById('testConsoleOutput');
+    const tests = [
+      'Authentication flow validation',
+      'Cross-browser compatibility check',
+      'Accessibility compliance scan',
+      'Performance benchmark test',
+      'API integration verification',
+      'Visual regression detection'
+    ];
+
+    output.innerHTML = '<div style="color: #3b82f6;">[INFO] Starting test suite execution...</div>';
+
+    tests.forEach((test, index) => {
+      setTimeout(() => {
+        const status = Math.random() > 0.1 ? 'PASS' : 'WARN';
+        const color = status === 'PASS' ? '#22c55e' : '#f59e0b';
+        const icon = status === 'PASS' ? '✓' : '⚠';
+
+        output.innerHTML += `<div style="color: ${color};">[${status}] ${icon} ${test}</div>`;
+
+        if (index === tests.length - 1) {
+          setTimeout(() => {
+            output.innerHTML += '<div style="color: #22c55e;">[INFO] Test suite completed! Generating reports...</div>';
+          }, 500);
+        }
+      }, index * 600);
+    });
+  }
+
+  function clearConsole() {
+    document.getElementById('consoleOutput').innerHTML = '';
+    document.getElementById('testConsoleOutput').innerHTML = '';
+  }
+
+  function showLogs() {
+    const output = document.getElementById('consoleOutput');
+    output.innerHTML = `
+                <div style="color: #3b82f6;">[2025-06-29 10:15:32] System initialized</div>
+                <div style="color: #22c55e;">[2025-06-29 10:15:33] Docker containers healthy ✓</div>
+                <div style="color: #f59e0b;">[2025-06-29 10:15:35] Test environment provisioned</div>
+                <div style="color: #22c55e;">[2025-06-29 10:15:36] Database migrations completed ✓</div>
+                <div style="color: #3b82f6;">[2025-06-29 10:15:38] Ready for test execution</div>
+            `;
+  }
+
+  // Contact Actions
+  function scheduleConsultation() {
+    alert('📅 Consultation scheduling feature coming soon! Please email oriekenjr@gmail.com to arrange a meeting.');
+  }
+
+  function viewPortfolio() {
+    alert('🔍 GitHub portfolio integration coming soon! Visit github.com/oscarrieken for current projects.');
+  }
+
+  function downloadGuides() {
+    alert('📚 Testing guides download feature coming soon! Comprehensive SDET playbooks and automation frameworks will be available.');
+  }
+
+  function stopTests() {
+    const output = document.getElementById('testConsoleOutput');
+    output.innerHTML += '<div style="color: #ef4444;">[STOPPED] Test execution halted by user</div>';
+  }
+
+  // Initialize animations on page load
+  document.addEventListener('DOMContentLoaded', function() {
+    // Animate stats when page loads
+    setTimeout(animateStats, 1000);
+
+    // Auto-run test lines in terminal
+    setTimeout(() => {
+      const testRunner = document.getElementById('testRunner');
+      const lines = testRunner.querySelectorAll('.test-line');
+      lines.forEach((line, index) => {
+        line.style.opacity = '0';
+        setTimeout(() => {
+          line.style.opacity = '1';
+          line.style.animation = 'typewriter 0.5s ease-in';
+        }, index * 500);
+      });
+    }, 2000);
+
+    // Auto-advance pipeline stages
+    setTimeout(() => {
+      const stages = document.querySelectorAll('.pipeline-stage');
+      stages.forEach((stage, index) => {
+        if (index < 3) { // First 3 stages
+          setTimeout(() => {
+            if (index === 2) {
+              stage.classList.add('active');
+            } else {
+              stage.classList.add('complete');
+            }
+          }, index * 1000);
+        }
+      });
+    }, 3000);
+
+    // Smooth scrolling for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Add intersection observer for animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+
+          // Add special animations for certain elements
+          if (entry.target.classList.contains('framework-card')) {
+            entry.target.style.animation = 'slideInUp 0.6s ease-out';
+          }
+          if (entry.target.classList.contains('achievement-card')) {
+            entry.target.style.animation = 'fadeInScale 0.8s ease-out';
+          }
+        }
+      });
+    }, observerOptions);
+
+    // Observe all animated elements
+    const animatedElements = document.querySelectorAll('.framework-card, .achievement-card, .stat-card');
+    animatedElements.forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'all 0.6s ease';
+      observer.observe(el);
+    });
+
+    // Auto-update quality dashboard metrics
+    setInterval(updateQualityMetrics, 5000);
+  });
+
+  // Additional animations
+  const additionalStyles = document.createElement('style');
+  additionalStyles.textContent = `
+            @keyframes slideInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(50px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            @keyframes fadeInScale {
+                from {
+                    opacity: 0;
+                    transform: scale(0.9);
+                }
+                to {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+            }
+
+            @keyframes glowPulse {
+                0%, 100% {
+                    box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+                }
+                50% {
+                    box-shadow: 0 0 30px rgba(34, 197, 94, 0.6);
+                }
+            }
+
+            .demo-button:hover {
+                animation: glowPulse 2s ease-in-out infinite;
+            }
+
+            .browser-card.active {
+                animation: glowPulse 2s ease-in-out infinite;
+            }
+
+            .pipeline-stage.active {
+                animation: glowPulse 1.5s ease-in-out infinite;
+            }
+
+            /* Scrollbar styling */
+            ::-webkit-scrollbar {
+                width: 8px;
+            }
+
+            ::-webkit-scrollbar-track {
+                background: #1e293b;
+            }
+
+            ::-webkit-scrollbar-thumb {
+                background: #334155;
+                border-radius: 4px;
+            }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: #22c55e;
+            }
+
+            /* Loading spinner for demo buttons */
+            .demo-button:disabled {
+                position: relative;
+                color: transparent;
+            }
+
+            .demo-button:disabled::after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 20px;
+                height: 20px;
+                margin: -10px 0 0 -10px;
+                border: 2px solid transparent;
+                border-top: 2px solid #ffffff;
+                border-radius: 50%;
+                animation: spin 1s linear infinite;
+            }
+
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+
+            /* Enhanced hover effects */
+            .framework-card:hover {
+                background: rgba(0, 0, 0, 0.8);
+                transform: translateY(-10px) scale(1.02);
+            }
+
+            .achievement-card:hover {
+                background: linear-gradient(135deg, rgba(34, 197, 94, 0.2) 0%, rgba(59, 130, 246, 0.2) 100%);
+            }
+
+            /* Terminal cursor animation */
+            .terminal-cursor {
+                display: inline-block;
+                background: #22c55e;
+                width: 8px;
+                height: 16px;
+                animation: blink 1s step-end infinite;
+            }
+
+            @keyframes blink {
+                0%, 50% { opacity: 1; }
+                51%, 100% { opacity: 0; }
+            }
+
+            /* Code syntax highlighting improvements */
+            .code-demo .keyword { color: #f59e0b; }
+            .code-demo .string { color: #3b82f6; }
+            .code-demo .function { color: #22c55e; }
+            .code-demo .comment { color: #94a3b8; font-style: italic; }
+
+            /* Mobile responsiveness enhancements */
+            @media (max-width: 640px) {
+                .hero-title {
+                    font-size: 2rem;
+                    line-height: 1.2;
+                }
+
+                .terminal-window {
+                    padding: 1rem;
+                    margin: 0 1rem;
+                }
+
+                .framework-grid,
+                .achievements-grid {
+                    grid-template-columns: 1fr;
+                    gap: 1rem;
+                }
+
+                .pipeline-flow {
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                .pipeline-arrow {
+                    transform: rotate(90deg);
+                }
+
+                .contact-info {
+                    flex-direction: column;
+                    gap: 1rem;
+                }
+            }
+        `;
+  document.head.appendChild(additionalStyles);
+
+  // Update quality dashboard with simulated real-time data
+  function updateQualityMetrics() {
+    const stability = (97 + Math.random() * 3).toFixed(1);
+    const performance = (94 + Math.random() * 5).toFixed(1);
+    const unitCoverage = (96 + Math.random() * 3).toFixed(1);
+    const integrationCoverage = (92 + Math.random() * 4).toFixed(1);
+
+    // Update stability
+    const stabilityElement = document.querySelector('.quality-dashboard .grid div:first-child span:last-child');
+    if (stabilityElement) {
+      stabilityElement.textContent = stability + '%';
+      stabilityElement.parentElement.nextElementSibling.querySelector('div').style.width = stability + '%';
+    }
+
+    // Update performance
+    const performanceElement = document.querySelector('.quality-dashboard .grid div:first-child div:last-child span:last-child');
+    if (performanceElement) {
+      performanceElement.textContent = performance + '%';
+      performanceElement.parentElement.nextElementSibling.querySelector('div').style.width = performance + '%';
+    }
+  }
+
+  // Keyboard shortcuts for demo interactions
+  document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey || e.metaKey) {
+      switch(e.key) {
+        case '1':
+          e.preventDefault();
+          runPlaywrightDemo();
+          break;
+        case '2':
+          e.preventDefault();
+          runCypressDemo();
+          break;
+        case '3':
+          e.preventDefault();
+          runSeleniumDemo();
+          break;
+        case 'Enter':
+          e.preventDefault();
+          runTestSuite();
+          break;
+        case 'p':
+          e.preventDefault();
+          triggerPipeline();
+          break;
+      }
+    }
+  });
+
+  // Easter egg: Konami code for special animation
+  let konamiCode = [];
+  const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
+
+  document.addEventListener('keydown', function(e) {
+    konamiCode.push(e.code);
+    if (konamiCode.length > konamiSequence.length) {
+      konamiCode.shift();
+    }
+
+    if (konamiCode.join('') === konamiSequence.join('')) {
+      // Special testing animation
+      document.body.style.animation = 'rainbow 2s ease-in-out';
+      setTimeout(() => {
+        document.body.style.animation = '';
+        alert('🎉 Congratulations! You found the testing master easter egg! All tests are now supercharged! 🚀');
+      }, 2000);
+    }
+  });
+
+  // Add rainbow animation for easter egg
+  const rainbowStyles = document.createElement('style');
+  rainbowStyles.textContent = `
+            @keyframes rainbow {
+                0% { filter: hue-rotate(0deg); }
+                25% { filter: hue-rotate(90deg); }
+                50% { filter: hue-rotate(180deg); }
+                75% { filter: hue-rotate(270deg); }
+                100% { filter: hue-rotate(360deg); }
+            }
+        `;
+  document.head.appendChild(rainbowStyles);
+
+  // Performance monitoring
+  if ('performance' in window) {
+    window.addEventListener('load', function() {
+      setTimeout(() => {
+        const perfData = performance.getEntriesByType('navigation')[0];
+        const loadTime = perfData.loadEventEnd - perfData.loadEventStart;
+        console.log(`%c🚀 Page loaded in ${loadTime}ms - Testing excellence delivered!`, 'color: #22c55e; font-size: 14px; font-weight: bold;');
+      }, 0);
+    });
+  }
+
+  // Add helpful console messages
+  console.log('%c🧪 Oscar Rieken - Principal SDET Portfolio', 'color: #22c55e; font-size: 18px; font-weight: bold;');
+  console.log('%c⚡ Interactive features available:', 'color: #3b82f6; font-size: 14px; font-weight: bold;');
+  console.log('%c  • Ctrl+1: Run Playwright Demo', 'color: #94a3b8; font-size: 12px;');
+  console.log('%c  • Ctrl+2: Run Cypress Demo', 'color: #94a3b8; font-size: 12px;');
+  console.log('%c  • Ctrl+3: Run Selenium Demo', 'color: #94a3b8; font-size: 12px;');
+  console.log('%c  • Ctrl+Enter: Run Test Suite', 'color: #94a3b8; font-size: 12px;');
+  console.log('%c  • Ctrl+P: Trigger Pipeline', 'color: #94a3b8; font-size: 12px;');
+  console.log('%c🎯 Click browser icons, framework cards, and demo buttons for interactive experiences!', 'color: #f59e0b; font-size: 12px;');
+</script>
+</body>
+</html>

@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oscar Rieken - AI Developer Resume</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --text-dark: #2c3e50;
+            --text-medium: #34495e;
+            --text-light: #7f8c8d;
+            --border-light: #ecf0f1;
+            --bg-light: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.5;
+            color: var(--text-dark);
+            background: white;
+            font-size: 11pt;
+        }
+
+        .resume-container {
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 0.5in;
+            min-height: 11in;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+        }
+
+        .name {
+            font-size: 28pt;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .title {
+            font-size: 14pt;
+            color: var(--text-medium);
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .contact-info {
+            font-size: 10pt;
+            color: var(--text-light);
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Section Headers */
+        .section {
+            margin-bottom: 25px;
+            page-break-inside: avoid;
+        }
+
+        .section-title {
+            font-size: 14pt;
+            font-weight: 600;
+            color: var(--primary-color);
+            border-bottom: 1px solid var(--accent-color);
+            padding-bottom: 4px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Professional Summary */
+        .summary {
+            font-size: 11pt;
+            line-height: 1.6;
+            text-align: justify;
+            margin-bottom: 20px;
+        }
+
+        /* Two Column Layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        /* Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .metric-item {
+            text-align: center;
+            padding: 12px;
+            border: 1px solid var(--border-light);
+            border-radius: 6px;
+            background: var(--bg-light);
+        }
+
+        .metric-value {
+            font-size: 18pt;
+            font-weight: 700;
+            color: var(--accent-color);
+            display: block;
+        }
+
+        .metric-label {
+            font-size: 9pt;
+            color: var(--text-light);
+            margin-top: 4px;
+        }
+
+        /* Experience */
+        .experience-item {
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+        }
+
+        .job-title {
+            font-size: 12pt;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .company {
+            font-size: 11pt;
+            color: var(--accent-color);
+            font-weight: 500;
+            margin-top: 2px;
+        }
+
+        .date-location {
+            font-size: 9pt;
+            color: var(--text-light);
+            text-align: right;
+            font-family: 'Fira Code', monospace;
+        }
+
+        .job-description {
+            font-size: 10pt;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .highlights {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .highlights li {
+            font-size: 10pt;
+            margin-bottom: 4px;
+            padding-left: 12px;
+            position: relative;
+            line-height: 1.3;
+        }
+
+        .highlights li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .skill-category {
+            background: var(--bg-light);
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid var(--border-light);
+        }
+
+        .skill-category h4 {
+            font-size: 11pt;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            border-bottom: 1px solid var(--border-light);
+            padding-bottom: 4px;
+        }
+
+        .skill-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+            font-size: 10pt;
+        }
+
+        .skill-name {
+            font-weight: 500;
+        }
+
+        .skill-level {
+            font-size: 9pt;
+            color: var(--text-light);
+            font-family: 'Fira Code', monospace;
+            background: var(--border-light);
+            padding: 1px 6px;
+            border-radius: 3px;
+        }
+
+        /* Projects */
+        .project-item {
+            margin-bottom: 15px;
+            padding: 15px;
+            border: 1px solid var(--border-light);
+            border-radius: 6px;
+            background: var(--bg-light);
+            page-break-inside: avoid;
+        }
+
+        .project-title {
+            font-size: 11pt;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 6px;
+        }
+
+        .project-description {
+            font-size: 10pt;
+            line-height: 1.4;
+            margin-bottom: 8px;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .tech-tag {
+            font-size: 8pt;
+            background: var(--accent-color);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Fira Code', monospace;
+        }
+
+        /* Education */
+        .education-item {
+            margin-bottom: 12px;
+            padding: 12px;
+            background: var(--bg-light);
+            border-radius: 6px;
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .education-title {
+            font-size: 11pt;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 3px;
+        }
+
+        .education-school {
+            font-size: 10pt;
+            color: var(--accent-color);
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+
+        .education-status {
+            font-size: 9pt;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        /* Previous roles summary */
+        .roles-summary {
+            background: var(--bg-light);
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid var(--border-light);
+        }
+
+        .role-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 10pt;
+        }
+
+        .role-title {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .role-company {
+            color: var(--text-light);
+        }
+
+        /* Print Specific Styles */
+        @media print {
+            body {
+                font-size: 10pt;
+            }
+
+            .resume-container {
+                padding: 0.25in;
+                box-shadow: none;
+                max-width: none;
+            }
+
+            .section {
+                page-break-inside: avoid;
+                margin-bottom: 20px;
+            }
+
+            .name {
+                font-size: 24pt;
+            }
+
+            .title {
+                font-size: 12pt;
+            }
+
+            .contact-info {
+                font-size: 9pt;
+            }
+
+            .metrics-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 10px;
+            }
+
+            .two-column {
+                gap: 20px;
+            }
+
+            /* Ensure important sections don't break */
+            .experience-item,
+            .project-item,
+            .education-item {
+                page-break-inside: avoid;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .job-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .date-location {
+                text-align: left;
+                margin-top: 4px;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="resume-container">
+    <!-- Header -->
+    <header class="header">
+        <h1 class="name">Oscar Rieken</h1>
+        <div class="title">Principal AI Engineer | ML Solutions Architect | Automation Specialist</div>
+        <div class="contact-info">
+            <span>📍 New Orleans, LA | Butler, PA</span>
+            <span>📧 oriekenjr@gmail.com</span>
+            <span>📱 +1 504 723 4720</span>
+        </div>
+    </header>
+
+    <!-- Professional Summary -->
+    <section class="section">
+        <h2 class="section-title">Professional Summary</h2>
+        <p class="summary">
+            Principal AI Engineer and ML Solutions Architect with 18+ years of experience revolutionizing software quality through innovative AI/ML integration and advanced automation frameworks. Currently pioneering next-generation testing solutions by combining machine learning with traditional SDET practices, creating intelligent dashboards that provide real-time insights and predictive analytics. Proven track record of mentoring 90+ product teams, leading enterprise-scale automation transformations, and building scalable CI/CD pipelines that accelerate delivery while maintaining exceptional quality standards.
+        </p>
+    </section>
+
+    <!-- Key Metrics -->
+    <section class="section">
+        <h2 class="section-title">Key Performance Metrics</h2>
+        <div class="metrics-grid">
+            <div class="metric-item">
+                <span class="metric-value">95%</span>
+                <div class="metric-label">ML Model Accuracy</div>
+            </div>
+            <div class="metric-item">
+                <span class="metric-value">40%</span>
+                <div class="metric-label">CI/CD Speed Increase</div>
+            </div>
+            <div class="metric-item">
+                <span class="metric-value">7</span>
+                <div class="metric-label">Teams Mentored</div>
+            </div>
+            <div class="metric-item">
+                <span class="metric-value">18+</span>
+                <div class="metric-label">Years Experience</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Experience -->
+    <section class="section">
+        <h2 class="section-title">Professional Experience</h2>
+
+        <!-- Current Role -->
+        <div class="experience-item">
+            <div class="job-header">
+                <div>
+                    <div class="job-title">Principal AI Engineer & Consultant</div>
+                    <div class="company">Rieken Consulting</div>
+                </div>
+                <div class="date-location">
+                    August 2023 - Present<br>
+                    Remote
+                </div>
+            </div>
+            <div class="job-description">
+                AI Engineer and ML Solutions Architect specializing in intelligent automation systems and production ML deployments. Expert in building end-to-end AI pipelines from research to production, with focus on RAG models, GPT integration, and MLOps best practices.
+            </div>
+            <ul class="highlights">
+                <li>Architected ML-powered testing platform with RAG model integration for intelligent test failure analysis</li>
+                <li>Built custom AI frameworks for automated root cause analysis and predictive maintenance</li>
+                <li>Developed unified monitoring dashboards integrating AI insights with traditional DevOps metrics</li>
+                <li>Led AI adoption initiatives across 7 development teams with 85% success rate</li>
+                <li>Created SDET-to-AI transition playbook and comprehensive training curriculum</li>
+            </ul>
+        </div>
+
+        <!-- Previous Roles Summary -->
+        <div class="roles-summary">
+            <h4 style="margin-bottom: 10px; color: var(--primary-color);">Previous Leadership Positions</h4>
+            <div class="role-item">
+                <span class="role-title">Principal SDET</span>
+                <span class="role-company">ADP (2016-2023)</span>
+            </div>
+            <div class="role-item">
+                <span class="role-title">Lead Software Engineer</span>
+                <span class="role-company">The Home Depot (2015-2017)</span>
+            </div>
+            <div class="role-item">
+                <span class="role-title">Lead Software Engineer in Test</span>
+                <span class="role-company">IONIC Security (2014-2015)</span>
+            </div>
+            <div class="role-item">
+                <span class="role-title">Lead QA Analyst</span>
+                <span class="role-company">Manheim (2012-2014)</span>
+            </div>
+            <div class="role-item">
+                <span class="role-title">Lead QA Analyst</span>
+                <span class="role-company">ThoughtWorks (2006-2011)</span>
+            </div>
+            <p style="font-size: 9pt; color: var(--text-light); margin-top: 8px; line-height: 1.3;">
+                Progressive career advancement from foundational automation frameworks to enterprise-scale AI/ML integration.
+                Consistently led technology transformations, mentored development teams, and established industry best practices across Fortune 500 companies.
+            </p>
+        </div>
+    </section>
+
+    <!-- Two Column Section -->
+    <div class="two-column">
+        <!-- Technical Skills -->
+        <section class="section">
+            <h2 class="section-title">Technical Expertise</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h4>🤖 Machine Learning</h4>
+                    <div class="skill-item">
+                        <span class="skill-name">Python</span>
+                        <span class="skill-level">Expert (10+ years)</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">TensorFlow</span>
+                        <span class="skill-level">Advanced</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">PyTorch</span>
+                        <span class="skill-level">Advanced</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Scikit-learn</span>
+                        <span class="skill-level">Expert</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h4>🧠 NLP & LLMs</h4>
+                    <div class="skill-item">
+                        <span class="skill-name">RAG Models</span>
+                        <span class="skill-level">Expert</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">GPT Integration</span>
+                        <span class="skill-level">Advanced</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Transformers</span>
+                        <span class="skill-level">Advanced</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Langchain</span>
+                        <span class="skill-level">Proficient</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h4>⚙️ MLOps & DevOps</h4>
+                    <div class="skill-item">
+                        <span class="skill-name">Docker/Kubernetes</span>
+                        <span class="skill-level">Expert</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">MLflow</span>
+                        <span class="skill-level">Advanced</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Jenkins CI/CD</span>
+                        <span class="skill-level">Expert</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Prometheus/Grafana</span>
+                        <span class="skill-level">Advanced</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h4>📊 Data Science</h4>
+                    <div class="skill-item">
+                        <span class="skill-name">Pandas/NumPy</span>
+                        <span class="skill-level">Expert</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Jupyter</span>
+                        <span class="skill-level">Expert</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Apache Airflow</span>
+                        <span class="skill-level">Advanced</span>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Model Monitoring</span>
+                        <span class="skill-level">Advanced</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Solutions Portfolio -->
+        <section class="section">
+            <h2 class="section-title">AI Solutions Portfolio</h2>
+
+            <div class="project-item">
+                <div class="project-title">🤖 AI-Powered Test Analytics Platform</div>
+                <div class="project-description">
+                    Architected ML-powered testing platform with RAG model integration for intelligent test failure analysis.
+                    Built custom framework delivering real-time predictive analytics and automated root cause analysis.
+                </div>
+                <div class="tech-tags">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">RAG Models</span>
+                    <span class="tech-tag">TensorFlow</span>
+                    <span class="tech-tag">Playwright</span>
+                    <span class="tech-tag">Grafana</span>
+                </div>
+            </div>
+
+            <div class="project-item">
+                <div class="project-title">🧠 RAG Model Integration System</div>
+                <div class="project-description">
+                    Developed unified monitoring dashboards integrating AI insights with traditional DevOps metrics.
+                    Created intelligent Jira automation and MS Teams bots for seamless CI/CD communication.
+                </div>
+                <div class="tech-tags">
+                    <span class="tech-tag">RAG</span>
+                    <span class="tech-tag">Vector DB</span>
+                    <span class="tech-tag">Langchain</span>
+                    <span class="tech-tag">Prometheus</span>
+                    <span class="tech-tag">Docker</span>
+                </div>
+            </div>
+
+            <div class="project-item">
+                <div class="project-title">⚡ Intelligent Automation Framework</div>
+                <div class="project-description">
+                    Led AI adoption initiatives across 7 development teams with 85% success rate.
+                    Built SDET-to-AI transition playbook and comprehensive training curriculum.
+                </div>
+                <div class="tech-tags">
+                    <span class="tech-tag">ML Pipelines</span>
+                    <span class="tech-tag">Automation</span>
+                    <span class="tech-tag">Jenkins</span>
+                    <span class="tech-tag">Kubernetes</span>
+                    <span class="tech-tag">GPT</span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Education & Certifications -->
+    <section class="section">
+        <h2 class="section-title">Education & Certifications</h2>
+        <div class="education-item">
+            <div class="education-title">Master's Degree - Machine Learning & Artificial Intelligence</div>
+            <div class="education-school">Heriot-Watt University</div>
+            <div class="education-status">In Progress - Expected Completion: 2025</div>
+        </div>
+        <div class="education-item">
+            <div class="education-title">IBM AI Developer Professional Certificate</div>
+            <div class="education-school">IBM</div>
+            <div class="education-status">In Progress - Expected Completion: March 2025</div>
+        </div>
+        <div class="education-item">
+            <div class="education-title">IBM Full Stack Developer Professional Certificate</div>
+            <div class="education-school">IBM</div>
+            <div class="education-status">In Progress - Expected Completion: March 2025</div>
+        </div>
+    </section>
+
+    <!-- Additional Information -->
+    <section class="section">
+        <h2 class="section-title">Additional Information</h2>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px;">
+            <div>
+                <strong style="color: var(--primary-color);">Languages:</strong><br>
+                <span style="font-size: 10pt;">Spanish (Fluent), Portuguese (Intermediate)</span>
+            </div>
+            <div>
+                <strong style="color: var(--primary-color);">Military Service:</strong><br>
+                <span style="font-size: 10pt;">United States Marine Corps</span>
+            </div>
+            <div>
+                <strong style="color: var(--primary-color);">Core Philosophy:</strong><br>
+                <span style="font-size: 10pt;">"Great leaders stay in the trenches with emerging tech"</span>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>

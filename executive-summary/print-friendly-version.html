@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oscar Rieken - Strategic Technology Leader</title>
+    <style>
+        /* Print-Optimized Executive Resume Styles */
+
+        /* Reset and Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @page {
+            size: 8.5in 11in;
+            margin: 0.5in;
+        }
+
+        body {
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            font-size: 11pt;
+            line-height: 1.4;
+            color: #2c3e50;
+            background: white;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .resume-container {
+            max-width: 7.5in;
+            margin: 0 auto;
+            background: white;
+        }
+
+        /* Typography Hierarchy */
+        h1 {
+            font-size: 28pt;
+            font-weight: 300;
+            color: #1a365d;
+            letter-spacing: -0.5pt;
+            margin-bottom: 8pt;
+        }
+
+        h2 {
+            font-size: 16pt;
+            font-weight: 600;
+            color: #1a365d;
+            margin-bottom: 12pt;
+            text-transform: uppercase;
+            letter-spacing: 0.5pt;
+        }
+
+        h3 {
+            font-size: 13pt;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 6pt;
+        }
+
+        h4 {
+            font-size: 11pt;
+            font-weight: 600;
+            color: #1a365d;
+            margin-bottom: 4pt;
+        }
+
+        /* Executive Header */
+        .executive-header {
+            text-align: center;
+            padding: 20pt 0;
+            border-bottom: 3pt solid #1a365d;
+            margin-bottom: 20pt;
+        }
+
+        .executive-title {
+            font-size: 14pt;
+            color: #4a5568;
+            font-weight: 400;
+            margin-bottom: 12pt;
+        }
+
+        .value-proposition {
+            font-size: 11pt;
+            color: #2c3e50;
+            line-height: 1.5;
+            max-width: 6in;
+            margin: 0 auto 12pt auto;
+            text-align: justify;
+        }
+
+        .contact-info {
+            font-size: 10pt;
+            color: #4a5568;
+            display: flex;
+            justify-content: center;
+            gap: 24pt;
+            flex-wrap: wrap;
+        }
+
+        /* KPI Dashboard */
+        .kpi-section {
+            margin-bottom: 24pt;
+            page-break-inside: avoid;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12pt;
+            margin-top: 12pt;
+        }
+
+        .kpi-card {
+            text-align: center;
+            padding: 12pt;
+            border: 1pt solid #e2e8f0;
+            border-top: 3pt solid #1a365d;
+            background: #f8fafb;
+        }
+
+        .kpi-number {
+            font-size: 24pt;
+            font-weight: 700;
+            color: #1a365d;
+            margin-bottom: 4pt;
+            line-height: 1;
+        }
+
+        .kpi-label {
+            font-size: 9pt;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 2pt;
+        }
+
+        .kpi-context {
+            font-size: 8pt;
+            color: #718096;
+            font-style: italic;
+        }
+
+        /* Section Styling */
+        .section {
+            margin-bottom: 20pt;
+            page-break-inside: avoid;
+        }
+
+        .section-title {
+            border-bottom: 1pt solid #b7791f;
+            padding-bottom: 4pt;
+            margin-bottom: 12pt;
+        }
+
+        /* Strategic Accomplishments */
+        .accomplishments-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12pt;
+            margin-top: 8pt;
+        }
+
+        .accomplishment-card {
+            padding: 12pt;
+            border: 1pt solid #e2e8f0;
+            border-left: 4pt solid #1a365d;
+            background: #f8fafb;
+        }
+
+        .accomplishment-icon {
+            font-size: 16pt;
+            margin-bottom: 6pt;
+            display: block;
+        }
+
+        .accomplishment-title {
+            font-size: 11pt;
+            font-weight: 600;
+            color: #1a365d;
+            margin-bottom: 6pt;
+        }
+
+        .accomplishment-desc {
+            font-size: 9pt;
+            line-height: 1.4;
+            color: #2c3e50;
+        }
+
+        .roi-highlight {
+            background: #fff3cd;
+            padding: 1pt 3pt;
+            border-radius: 2pt;
+            font-weight: 600;
+            color: #856404;
+        }
+
+        /* Leadership Timeline */
+        .leadership-grid {
+            display: grid;
+            grid-template-columns: 2.5fr 1fr;
+            gap: 20pt;
+            margin-top: 8pt;
+        }
+
+        .timeline-container {
+            position: relative;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 8pt;
+            top: 0;
+            bottom: 0;
+            width: 1pt;
+            background: #b7791f;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 16pt;
+            padding-left: 20pt;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 4pt;
+            top: 4pt;
+            width: 8pt;
+            height: 8pt;
+            background: #b7791f;
+            border-radius: 50%;
+            border: 2pt solid white;
+            box-shadow: 0 0 0 1pt #b7791f;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 10pt;
+            border: 1pt solid #e2e8f0;
+            border-left: 3pt solid #b7791f;
+        }
+
+        .timeline-role {
+            font-size: 11pt;
+            font-weight: 600;
+            color: #1a365d;
+            margin-bottom: 3pt;
+        }
+
+        .timeline-company {
+            color: #b7791f;
+            font-weight: 500;
+            font-size: 10pt;
+            margin-bottom: 2pt;
+        }
+
+        .timeline-period {
+            color: #718096;
+            font-size: 9pt;
+            margin-bottom: 6pt;
+        }
+
+        .timeline-impact {
+            color: #2c3e50;
+            font-size: 9pt;
+            line-height: 1.4;
+        }
+
+        /* Leadership Stats */
+        .stats-column {
+            display: flex;
+            flex-direction: column;
+            gap: 12pt;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 12pt;
+            border: 1pt solid #e2e8f0;
+            background: white;
+        }
+
+        .stat-value {
+            font-size: 20pt;
+            font-weight: 700;
+            color: #1a365d;
+            margin-bottom: 4pt;
+        }
+
+        .stat-description {
+            font-size: 8pt;
+            color: #4a5568;
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        /* Innovation Grid */
+        .innovation-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12pt;
+            margin-top: 8pt;
+        }
+
+        .innovation-card {
+            padding: 10pt;
+            border: 1pt solid #e2e8f0;
+            border-top: 2pt solid #b7791f;
+            background: #f8fafb;
+        }
+
+        .innovation-title {
+            font-size: 10pt;
+            font-weight: 600;
+            color: #1a365d;
+            margin-bottom: 4pt;
+            display: flex;
+            align-items: center;
+            gap: 4pt;
+        }
+
+        .innovation-icon {
+            font-size: 12pt;
+        }
+
+        .innovation-description {
+            font-size: 9pt;
+            color: #2c3e50;
+            line-height: 1.3;
+            margin-bottom: 6pt;
+        }
+
+        .innovation-metrics {
+            background: rgba(26,54,93,0.05);
+            padding: 4pt;
+            border-radius: 2pt;
+            border-left: 2pt solid #b7791f;
+        }
+
+        .metric {
+            font-size: 8pt;
+            font-weight: 600;
+            color: #1a365d;
+        }
+
+        .metric-value {
+            font-size: 8pt;
+            color: #2c3e50;
+        }
+
+        /* Education */
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10pt;
+            margin-top: 8pt;
+        }
+
+        .education-card {
+            text-align: center;
+            padding: 10pt;
+            border: 1pt solid #e2e8f0;
+            border-top: 2pt solid #1a365d;
+            background: white;
+        }
+
+        .education-title {
+            font-size: 9pt;
+            font-weight: 600;
+            color: #1a365d;
+            margin-bottom: 3pt;
+        }
+
+        .education-institution {
+            color: #b7791f;
+            font-weight: 500;
+            font-size: 8pt;
+            margin-bottom: 2pt;
+        }
+
+        .education-status {
+            color: #4a5568;
+            font-size: 7pt;
+            font-style: italic;
+        }
+
+        /* Additional Info */
+        .additional-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12pt;
+            margin-top: 12pt;
+        }
+
+        .info-card {
+            padding: 8pt;
+            border: 1pt solid #e2e8f0;
+            background: white;
+        }
+
+        .info-card h4 {
+            margin-bottom: 6pt;
+        }
+
+        .competency-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3pt;
+        }
+
+        .tag {
+            padding: 2pt 6pt;
+            border-radius: 8pt;
+            font-size: 7pt;
+            font-weight: 500;
+        }
+
+        .tag.primary {
+            background: #1a365d;
+            color: white;
+        }
+
+        .tag.secondary {
+            background: #b7791f;
+            color: white;
+        }
+
+        .qualification-list {
+            font-size: 8pt;
+            color: #2c3e50;
+            line-height: 1.4;
+        }
+
+        .qualification-list div {
+            margin-bottom: 3pt;
+        }
+
+        /* Page Break Controls */
+        .page-break-before {
+            page-break-before: always;
+        }
+
+        .page-break-after {
+            page-break-after: always;
+        }
+
+        .no-page-break {
+            page-break-inside: avoid;
+        }
+
+        /* Print-specific adjustments */
+        @media print {
+            body {
+                font-size: 10pt;
+            }
+
+            .executive-header {
+                padding: 16pt 0;
+            }
+
+            h1 {
+                font-size: 24pt;
+            }
+
+            h2 {
+                font-size: 14pt;
+            }
+
+            .section {
+                margin-bottom: 16pt;
+            }
+
+            .kpi-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .accomplishments-grid,
+            .innovation-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .leadership-grid {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+
+        /* Ensure proper contrast for printing */
+        .kpi-card,
+        .accomplishment-card,
+        .innovation-card,
+        .education-card,
+        .stat-card,
+        .timeline-content,
+        .info-card {
+            background: white !important;
+            border-color: #2c3e50 !important;
+        }
+
+        /* Strong emphasis for key metrics */
+        .emphasis {
+            font-weight: 700;
+            color: #1a365d;
+        }
+
+        /* Subtle backgrounds for sections */
+        .kpi-card,
+        .accomplishment-card {
+            background: #fafbfc !important;
+        }
+
+        /* Professional spacing */
+        .section + .section {
+            margin-top: 20pt;
+        }
+    </style>
+</head>
+<body>
+<div class="resume-container">
+    <!-- Executive Header -->
+    <header class="executive-header no-page-break">
+        <h1>Oscar Rieken</h1>
+        <div class="executive-title">Principal Technology Leader & Strategic Automation Architect</div>
+        <p class="value-proposition">
+            Transformational technology executive with <span class="emphasis">18+ years</span> driving enterprise-scale digital transformations.
+            Proven track record delivering <span class="emphasis">60% deployment acceleration</span>, mentoring <span class="emphasis">90+ product teams</span>,
+            and pioneering AI-driven automation frameworks that generate measurable ROI and competitive advantage.
+        </p>
+        <div class="contact-info">
+            <span>📍 New Orleans, LA | Butler, PA</span>
+            <span>📧 oriekenjr@gmail.com</span>
+            <span>📱 +1 504 723 4720</span>
+        </div>
+    </header>
+
+    <!-- KPI Dashboard -->
+    <section class="kpi-section no-page-break">
+        <h2>Strategic Impact & Performance Metrics</h2>
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-number">60%</div>
+                <div class="kpi-label">Deployment Time Reduction</div>
+                <div class="kpi-context">Enterprise CI/CD optimization</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-number">90+</div>
+                <div class="kpi-label">Product Teams Transformed</div>
+                <div class="kpi-context">Agile & automation adoption</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-number">$2.3M</div>
+                <div class="kpi-label">Estimated Annual Savings</div>
+                <div class="kpi-context">Process automation & efficiency</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-number">Top 5</div>
+                <div class="kpi-label">App Store Rankings</div>
+                <div class="kpi-context">Accessibility-driven quality</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Strategic Accomplishments -->
+    <section class="section">
+        <h2 class="section-title">Strategic Accomplishments</h2>
+        <div class="accomplishments-grid">
+            <div class="accomplishment-card">
+                <span class="accomplishment-icon">🚀</span>
+                <h3 class="accomplishment-title">Enterprise Digital Transformation</h3>
+                <p class="accomplishment-desc">
+                    Led comprehensive automation transformation across <span class="roi-highlight">90+ product teams</span>
+                    at ADP, implementing modern CI/CD pipelines that reduced deployment cycles by
+                    <span class="roi-highlight">60%</span> and eliminated critical production failures by
+                    <span class="roi-highlight">85%</span>.
+                </p>
+            </div>
+            <div class="accomplishment-card">
+                <span class="accomplishment-icon">🤖</span>
+                <h3 class="accomplishment-title">AI-Driven Innovation Leadership</h3>
+                <p class="accomplishment-desc">
+                    Pioneered integration of machine learning and RAG models into testing frameworks,
+                    creating intelligent dashboards that predict failures with <span class="roi-highlight">94% accuracy</span>
+                    and automate root cause analysis, saving <span class="roi-highlight">40+ hours weekly</span> per team.
+                </p>
+            </div>
+            <div class="accomplishment-card">
+                <span class="accomplishment-icon">📈</span>
+                <h3 class="accomplishment-title">Market-Leading Quality Standards</h3>
+                <p class="accomplishment-desc">
+                    Architected accessibility-first testing strategy using Playwright + Axe integration,
+                    directly contributing to ADP mobile applications achieving
+                    <span class="roi-highlight">top 5 business app rankings</span> on both Android and iOS platforms.
+                </p>
+            </div>
+            <div class="accomplishment-card">
+                <span class="accomplishment-icon">👥</span>
+                <h3 class="accomplishment-title">Organizational Leadership Excellence</h3>
+                <p class="accomplishment-desc">
+                    Developed and mentored <span class="roi-highlight">12 principal-level SDETs</span> and influenced
+                    engineering practices across Fortune 500 ecosystems, establishing industry-leading
+                    automation playbooks adopted by <span class="roi-highlight">15+ Fortune 1000 companies</span>.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership Portfolio -->
+    <section class="section">
+        <h2 class="section-title">Leadership Portfolio & Career Progression</h2>
+        <div class="leadership-grid">
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-role">Principal SDET & Strategic Consultant</h3>
+                        <div class="timeline-company">Rieken Consulting</div>
+                        <div class="timeline-period">2023 - Present</div>
+                        <p class="timeline-impact">
+                            Leading AI-driven automation initiatives for enterprise clients. Built ML-powered testing
+                            platforms with 94% failure prediction accuracy. Mentoring 7 development teams in
+                            next-generation automation strategies.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-role">Principal Software Architect</h3>
+                        <div class="timeline-company">ADP</div>
+                        <div class="timeline-period">2016 - 2023</div>
+                        <p class="timeline-impact">
+                            Transformed 90+ product teams across MyADP ecosystem. Led Protractor → Cypress/Playwright
+                            migration affecting 500+ engineers. Established accessibility standards contributing to
+                            top 5 app store rankings.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-role">Lead Software Engineer</h3>
+                        <div class="timeline-company">The Home Depot</div>
+                        <div class="timeline-period">2015 - 2017</div>
+                        <p class="timeline-impact">
+                            Directed AngularJS migration and TDD/BDD adoption. Established CI/CD best practices
+                            and comprehensive automation blueprints for incremental delivery excellence.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-role">Lead Software Engineer in Test</h3>
+                        <div class="timeline-company">IONIC Security</div>
+                        <div class="timeline-period">2014 - 2015</div>
+                        <p class="timeline-impact">
+                            Built greenfield automation framework and led team of 5 engineers in infrastructure automation.
+                            Introduced deployment automation and infrastructure health monitoring.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-column">
+                <div class="stat-card">
+                    <div class="stat-value">102</div>
+                    <div class="stat-description">Total Teams Mentored<br>Across Career</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">12</div>
+                    <div class="stat-description">Principal-Level SDETs<br>Developed & Promoted</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">500+</div>
+                    <div class="stat-description">Engineers Influenced<br>Through Frameworks</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">7</div>
+                    <div class="stat-description">Programming Languages<br>Expert Proficiency</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Innovation Showcase -->
+    <section class="section">
+        <h2 class="section-title">Technology Innovation & Strategic Initiatives</h2>
+        <div class="innovation-grid">
+            <div class="innovation-card">
+                <h3 class="innovation-title">
+                    <span class="innovation-icon">🧠</span>
+                    AI-Powered Test Intelligence
+                </h3>
+                <p class="innovation-description">
+                    Developed proprietary ML dashboard integrating RAG models, GPT APIs, and real-time telemetry
+                    for predictive failure analysis and automated root cause identification.
+                </p>
+                <div class="innovation-metrics">
+                    <div class="metric">ROI Impact:</div>
+                    <div class="metric-value">94% prediction accuracy • 40hr/week savings per team • $450K annual value</div>
+                </div>
+            </div>
+
+            <div class="innovation-card">
+                <h3 class="innovation-title">
+                    <span class="innovation-icon">🔄</span>
+                    Enterprise Framework Migration
+                </h3>
+                <p class="innovation-description">
+                    Orchestrated seamless transition from legacy Protractor to modern Cypress/Playwright
+                    ecosystems across 90+ teams, maintaining zero-downtime while improving test reliability.
+                </p>
+                <div class="innovation-metrics">
+                    <div class="metric">Strategic Value:</div>
+                    <div class="metric-value">Zero downtime migration • 60% faster test execution • 500+ engineers impacted</div>
+                </div>
+            </div>
+
+            <div class="innovation-card">
+                <h3 class="innovation-title">
+                    <span class="innovation-icon">♿</span>
+                    Accessibility-First Quality Standards
+                </h3>
+                <p class="innovation-description">
+                    Pioneered automated accessibility testing integration using Playwright + Axe tooling,
+                    establishing enterprise-wide a11y compliance standards and monitoring.
+                </p>
+                <div class="innovation-metrics">
+                    <div class="metric">Business Impact:</div>
+                    <div class="metric-value">Top 5 app store rankings • 100% WCAG compliance • $1.2M revenue protection</div>
+                </div>
+            </div>
+
+            <div class="innovation-card">
+                <h3 class="innovation-title">
+                    <span class="innovation-icon">📊</span>
+                    Real-Time Analytics Platform
+                </h3>
+                <p class="innovation-description">
+                    Built unified Grafana dashboards integrating Prometheus, Ollama, and automated Jira
+                    ticket creation with MS Teams bot notifications for comprehensive CI/CD monitoring.
+                </p>
+                <div class="innovation-metrics">
+                    <div class="metric">Operational Excellence:</div>
+                    <div class="metric-value">Real-time insights • Automated incident response • 75% faster MTTR</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education & Credentials -->
+    <section class="section">
+        <h2 class="section-title">Advanced Education & Professional Development</h2>
+        <div class="education-grid">
+            <div class="education-card">
+                <h3 class="education-title">Master's Degree</h3>
+                <div class="education-institution">Machine Learning & AI</div>
+                <div class="education-institution">Heriot-Watt University</div>
+                <div class="education-status">In Progress - 2025</div>
+            </div>
+            <div class="education-card">
+                <h3 class="education-title">IBM Full Stack Developer</h3>
+                <div class="education-institution">Professional Certificate</div>
+                <div class="education-institution">IBM</div>
+                <div class="education-status">Expected March 2025</div>
+            </div>
+            <div class="education-card">
+                <h3 class="education-title">IBM AI Developer</h3>
+                <div class="education-institution">Professional Certificate</div>
+                <div class="education-institution">IBM</div>
+                <div class="education-status">Expected March 2025</div>
+            </div>
+        </div>
+
+        <div class="additional-info">
+            <div class="info-card">
+                <h4>Core Competencies</h4>
+                <div class="competency-tags">
+                    <span class="tag primary">Enterprise Architecture</span>
+                    <span class="tag secondary">AI/ML Integration</span>
+                    <span class="tag primary">Strategic Leadership</span>
+                    <span class="tag secondary">Digital Transformation</span>
+                    <span class="tag primary">Team Development</span>
+                    <span class="tag secondary">Process Optimization</span>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <h4>Additional Qualifications</h4>
+                <div class="qualification-list">
+                    <div><strong>Languages:</strong> Spanish (Fluent), Portuguese (Intermediate)</div>
+                    <div><strong>Military Service:</strong> United States Marine Corps</div>
+                    <div><strong>Security Clearance:</strong> Available upon request</div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+  // Print-optimized JavaScript for final adjustments
+  window.addEventListener('load', function() {
+    // Ensure proper page breaks
+    const sections = document.querySelectorAll('.section');
+    sections.forEach((section, index) => {
+      // Add strategic page breaks for better printing
+      if (index === 2) { // After Leadership Portfolio
+        section.style.pageBreakAfter = 'always';
+      }
+    });
+
+    // Optimize for print immediately
+    document.body.style.fontSize = '10pt';
+    document.body.style.lineHeight = '1.3';
+
+    // Remove any potential interactive elements for print
+    const interactiveElements = document.querySelectorAll('[onclick], [onhover]');
+    interactiveElements.forEach(el => {
+      el.style.cursor = 'default';
+    });
+  });
+
+  // Auto-print functionality (optional)
+  // window.print();
+</script>
+</body>
+</html>

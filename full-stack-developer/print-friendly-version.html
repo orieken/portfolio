@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oscar Rieken - Senior Full-Stack Developer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-tertiary: #e9ecef;
+            --text-primary: #212529;
+            --text-secondary: #6c757d;
+            --accent-blue: #0066cc;
+            --accent-green: #28a745;
+            --accent-purple: #6f42c1;
+            --accent-orange: #fd7e14;
+            --border-color: #dee2e6;
+            --font-mono: 'Courier New', monospace;
+            --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            font-size: 11pt;
+        }
+
+        .resume-container {
+            max-width: 8.5in;
+            margin: 0 auto;
+            background: white;
+            padding: 0.5in;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid var(--accent-blue);
+            margin-bottom: 1.5rem;
+        }
+
+        .name {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-bottom: 0.3rem;
+            letter-spacing: 1px;
+        }
+
+        .title {
+            font-size: 1.1em;
+            color: var(--text-secondary);
+            margin-bottom: 0.8rem;
+            font-family: var(--font-mono);
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            font-size: 0.9em;
+            color: var(--text-secondary);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        /* Section Titles */
+        .section {
+            margin-bottom: 1.5rem;
+            page-break-inside: avoid;
+        }
+
+        .section-title {
+            font-size: 1.2em;
+            color: var(--accent-blue);
+            border-bottom: 1px solid var(--accent-blue);
+            padding-bottom: 0.3rem;
+            margin-bottom: 1rem;
+            font-family: var(--font-mono);
+            font-weight: 600;
+        }
+
+        /* Professional Summary */
+        .summary {
+            font-size: 1em;
+            line-height: 1.6;
+            color: var(--text-primary);
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .stat-card {
+            text-align: center;
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .stat-number {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--accent-blue);
+            font-family: var(--font-mono);
+            margin-bottom: 0.2rem;
+        }
+
+        .stat-label {
+            font-size: 0.8em;
+            color: var(--text-secondary);
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .skill-category {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .skill-category h3 {
+            font-family: var(--font-mono);
+            font-size: 1em;
+            margin-bottom: 0.8rem;
+            color: var(--accent-blue);
+        }
+
+        .skill-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-size: 0.9em;
+        }
+
+        .skill-name {
+            font-family: var(--font-mono);
+            color: var(--text-primary);
+        }
+
+        .skill-level {
+            font-size: 0.8em;
+            color: var(--text-secondary);
+            background: var(--bg-tertiary);
+            padding: 0.1rem 0.4rem;
+            border-radius: 3px;
+            font-family: var(--font-mono);
+        }
+
+        /* Experience Section */
+        .experience-grid {
+            display: grid;
+            gap: 1.2rem;
+        }
+
+        .job {
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-blue);
+            page-break-inside: avoid;
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.8rem;
+        }
+
+        .job-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: var(--accent-blue);
+            font-family: var(--font-mono);
+        }
+
+        .company {
+            font-size: 1em;
+            color: var(--accent-green);
+            font-weight: 500;
+        }
+
+        .date-location {
+            text-align: right;
+            font-size: 0.85em;
+            color: var(--text-secondary);
+            font-family: var(--font-mono);
+        }
+
+        .job-description {
+            font-size: 0.9em;
+            color: var(--text-secondary);
+            margin-bottom: 0.8rem;
+            line-height: 1.5;
+        }
+
+        .achievements {
+            list-style: none;
+        }
+
+        .achievements li {
+            margin-bottom: 0.4rem;
+            padding-left: 1rem;
+            position: relative;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+
+        .achievements li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: var(--accent-blue);
+            font-weight: bold;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .project-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            page-break-inside: avoid;
+        }
+
+        .project-title {
+            font-family: var(--font-mono);
+            font-size: 1em;
+            margin-bottom: 0.5rem;
+            color: var(--accent-blue);
+            font-weight: 600;
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            font-size: 0.85em;
+            line-height: 1.4;
+            margin-bottom: 0.8rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+        }
+
+        .tech-tag {
+            background: var(--bg-tertiary);
+            color: var(--accent-blue);
+            padding: 0.2rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.7em;
+            font-family: var(--font-mono);
+            border: 1px solid var(--border-color);
+        }
+
+        /* Education Section */
+        .education-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .education-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            page-break-inside: avoid;
+        }
+
+        .education-title {
+            color: var(--accent-blue);
+            font-family: var(--font-mono);
+            font-size: 0.95em;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .institution {
+            color: var(--accent-green);
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+
+        .status {
+            color: var(--accent-orange);
+            font-family: var(--font-mono);
+            font-size: 0.8em;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-description {
+            color: var(--text-secondary);
+            font-size: 0.85em;
+            line-height: 1.4;
+        }
+
+        /* Page Break Helpers */
+        .page-break {
+            page-break-before: always;
+        }
+
+        .avoid-break {
+            page-break-inside: avoid;
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                font-size: 10pt;
+            }
+
+            .resume-container {
+                padding: 0.3in;
+                max-width: none;
+            }
+
+            .section {
+                margin-bottom: 1.2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 0.8rem;
+            }
+
+            .projects-grid,
+            .education-grid {
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .skills-grid,
+            .projects-grid,
+            .education-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .job-header {
+                flex-direction: column;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="resume-container">
+    <!-- Header -->
+    <header class="header">
+        <h1 class="name">Oscar Rieken</h1>
+        <div class="title">// Senior Full-Stack Developer</div>
+        <div class="contact-info">
+            <div class="contact-item">📍 New Orleans, LA | Butler, PA</div>
+            <div class="contact-item">📧 oriekenjr@gmail.com</div>
+            <div class="contact-item">📱 +1 504 723 4720</div>
+        </div>
+    </header>
+
+    <!-- Professional Summary -->
+    <section class="section">
+        <h2 class="section-title">// Professional Summary</h2>
+        <p class="summary">
+            Senior Full-Stack Developer with 18+ years of experience building scalable web applications, leading development teams, and architecting enterprise-grade solutions. Expert in modern JavaScript frameworks, backend services, and DevOps practices. Proven track record of delivering high-performance applications serving 100K+ users while mentoring the next generation of developers. Passionate about clean code, innovative problem-solving, and leveraging cutting-edge technologies to create exceptional user experiences.
+        </p>
+    </section>
+
+    <!-- Key Metrics -->
+    <section class="section">
+        <h2 class="section-title">// Key Metrics</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">200K+</div>
+                <div class="stat-label">Lines of Code</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Apps Deployed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">90+</div>
+                <div class="stat-label">Developers Mentored</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">99.9%</div>
+                <div class="stat-label">Uptime Maintained</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Skills -->
+    <section class="section">
+        <h2 class="section-title">// Technical Expertise</h2>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h3>Frontend Technologies</h3>
+                <div class="skill-item">
+                    <span class="skill-name">JavaScript / TypeScript</span>
+                    <span class="skill-level">10+ years</span>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">React / Next.js</span>
+                    <span class="skill-level">Expert</span>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Vue.js / Angular</span>
+                    <span class="skill-level">Advanced</span>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">HTML5 / CSS3 / SASS</span>
+                    <span class="skill-level">Expert</span>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Responsive Design</span>
+                    <span class="skill-level">Expert</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3>Backend Technologies</h3>
+                <div class="skill-item">
+                    <span class="skill-name">Node.js / Express</span>
+                    <span class="skill-level">Expert</span>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Python / Django / FastAPI</span>
+                    <span class="skill-level">Advanced</span>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Ruby on Rails</span>
+                    <span class="skill-level">10+ years</span>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Java / Spring Boot</span>
+                    <span class="skill-level">Proficient</span>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">REST / GraphQL APIs</span>
+                    <span class="skill-level">Expert</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3>DevOps & Cloud</h3>
+                <div class="skill-item">
+                    <span class="skill-name">Docker / Kubernetes</span>
+                    <span class="skill-level">Advanced</span>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">AWS / Azure / GCP</span>
+                    <span class="skill-level">Proficient</span>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">CI/CD Pipelines</span>
+                    <span class="skill-level">Expert</span>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Jenkins / GitHub Actions</span>
+                    <span class="skill-level">Expert</span>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Monitoring & Analytics</span>
+                    <span class="skill-level">Advanced</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3>Databases & Tools</h3>
+                <div class="skill-item">
+                    <span class="skill-name">PostgreSQL / MySQL</span>
+                    <span class="skill-level">Advanced</span>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">MongoDB / Redis</span>
+                    <span class="skill-level">Proficient</span>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Git / Version Control</span>
+                    <span class="skill-level">Expert</span>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Agile / Scrum</span>
+                    <span class="skill-level">Expert</span>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-name">Test Automation</span>
+                    <span class="skill-level">Expert</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Projects -->
+    <section class="section">
+        <h2 class="section-title">// Featured Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-title">Enterprise Dashboard Platform</div>
+                <div class="project-description">
+                    Real-time analytics dashboard with microservices architecture, serving 10K+ concurrent users
+                    with sub-second response times and 99.9% uptime. Features real-time data processing and ML-driven insights.
+                </div>
+                <div class="project-tech">
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">Node.js</span>
+                    <span class="tech-tag">PostgreSQL</span>
+                    <span class="tech-tag">Redis</span>
+                    <span class="tech-tag">Docker</span>
+                    <span class="tech-tag">AWS</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-title">E-commerce Microservices Platform</div>
+                <div class="project-description">
+                    Scalable e-commerce platform with distributed architecture, payment processing,
+                    inventory management, and real-time order tracking. Processing $2M+ in transactions monthly.
+                </div>
+                <div class="project-tech">
+                    <span class="tech-tag">Vue.js</span>
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Django</span>
+                    <span class="tech-tag">MongoDB</span>
+                    <span class="tech-tag">Kubernetes</span>
+                    <span class="tech-tag">Stripe</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-title">Real-time Collaboration Suite</div>
+                <div class="project-description">
+                    Multi-user collaboration platform with live document editing, video conferencing,
+                    and project management features. Supports 50K+ concurrent collaborative sessions.
+                </div>
+                <div class="project-tech">
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">WebSocket</span>
+                    <span class="tech-tag">Node.js</span>
+                    <span class="tech-tag">WebRTC</span>
+                    <span class="tech-tag">Socket.io</span>
+                    <span class="tech-tag">MongoDB</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-title">Developer Tools & CLI Suite</div>
+                <div class="project-description">
+                    Open-source command-line tools and development utilities that improve developer productivity
+                    and automate common workflows. 10K+ downloads on npm.
+                </div>
+                <div class="project-tech">
+                    <span class="tech-tag">Node.js</span>
+                    <span class="tech-tag">TypeScript</span>
+                    <span class="tech-tag">Commander.js</span>
+                    <span class="tech-tag">Jest</span>
+                    <span class="tech-tag">GitHub Actions</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="page-break"></div>
+
+    <!-- Professional Experience -->
+    <section class="section">
+        <h2 class="section-title">// Professional Experience</h2>
+        <div class="experience-grid">
+            <div class="job avoid-break">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">Principal SDET & Full-Stack Architect</div>
+                        <div class="company">Rieken Consulting</div>
+                    </div>
+                    <div class="date-location">
+                        August 2023 - Present<br>
+                        Remote
+                    </div>
+                </div>
+                <div class="job-description">
+                    Leading AI/ML integration for modern testing frameworks and full-stack application development,
+                    serving clients across multiple industries with scalable, enterprise-grade solutions.
+                </div>
+                <ul class="achievements">
+                    <li>Architected ML-powered testing platform with RAG models and GPT integration for intelligent analysis</li>
+                    <li>Built custom full-stack applications serving 100K+ users with React, Node.js, and cloud infrastructure</li>
+                    <li>Led development teams in modern JavaScript frameworks, DevOps practices, and automation strategies</li>
+                    <li>Created comprehensive SDET playbook and developer onboarding curriculum</li>
+                    <li>Developed unified monitoring dashboards with real-time analytics and automated alerting</li>
+                </ul>
+            </div>
+
+            <div class="job avoid-break">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">Principal Software Development Engineer</div>
+                        <div class="company">ADP</div>
+                    </div>
+                    <div class="date-location">
+                        June 2016 - August 2023<br>
+                        Alpharetta, GA
+                    </div>
+                </div>
+                <div class="job-description">
+                    Principal Software Architect for MyADP Product ecosystem, driving Continuous Delivery and
+                    modern development practices across 90+ product teams.
+                </div>
+                <ul class="achievements">
+                    <li>Influenced 90+ product teams in migration from legacy systems to modern React/Angular applications</li>
+                    <li>Led enterprise-wide framework migration improving test reliability and cross-browser compatibility</li>
+                    <li>Implemented accessibility standards contributing to top 5 app store rankings for ADP mobile apps</li>
+                    <li>Built CI/CD pipelines and automated deployment systems reducing release time by 70%</li>
+                    <li>Established quality gates and comprehensive code review processes across development teams</li>
+                    <li>Mentored 12 SDETs and developers in full-stack development and automation best practices</li>
+                </ul>
+            </div>
+
+            <div class="job avoid-break">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">Lead Software Engineer</div>
+                        <div class="company">The Home Depot</div>
+                    </div>
+                    <div class="date-location">
+                        June 2015 - March 2017<br>
+                        Vinings, GA
+                    </div>
+                </div>
+                <div class="job-description">
+                    Led development team through major framework migration and established modern development practices.
+                </div>
+                <ul class="achievements">
+                    <li>Led team migration from proprietary JavaScript framework to AngularJS</li>
+                    <li>Established TDD/BDD practices and comprehensive automated testing strategies</li>
+                    <li>Built reusable component library adopted across multiple development teams</li>
+                    <li>Improved development velocity by 40% through process optimization and automation</li>
+                    <li>Delivered weekly training programs on modern development practices and frameworks</li>
+                </ul>
+            </div>
+
+            <div class="job avoid-break">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">Lead Software Engineer in Test</div>
+                        <div class="company">IONIC Security</div>
+                    </div>
+                    <div class="date-location">
+                        April 2014 - June 2015<br>
+                        Atlanta, GA
+                    </div>
+                </div>
+                <ul class="achievements">
+                    <li>Built greenfield automation framework and full-stack testing infrastructure from scratch</li>
+                    <li>Introduced infrastructure automation using Docker, Kubernetes, and modern DevOps practices</li>
+                    <li>Led team of 5 engineers in establishing development and quality engineering standards</li>
+                    <li>Established continuous deployment pipelines and monitoring systems</li>
+                </ul>
+            </div>
+
+            <div class="job avoid-break">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">Lead Quality Assurance Engineer</div>
+                        <div class="company">Manheim / ThoughtWorks</div>
+                    </div>
+                    <div class="date-location">
+                        July 2006 - April 2014<br>
+                        Atlanta, GA / Global
+                    </div>
+                </div>
+                <ul class="achievements">
+                    <li>Managed 15 engineers across global development teams building scalable web applications</li>
+                    <li>Built foundational automation frameworks and testing tools adopted company-wide</li>
+                    <li>Created open-source testing utilities with 50K+ downloads in developer community</li>
+                    <li>Established comprehensive quality engineering practices and developer mentorship programs</li>
+                    <li>Led integration testing with external systems and performance optimization initiatives</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education & Certifications -->
+    <section class="section">
+        <h2 class="section-title">// Education & Certifications</h2>
+        <div class="education-grid">
+            <div class="education-card">
+                <div class="education-title">Master's - Machine Learning & AI</div>
+                <div class="institution">Heriot-Watt University</div>
+                <div class="status">In Progress - Expected 2025</div>
+                <div class="education-description">
+                    Advanced coursework in ML algorithms, neural networks, and AI applications in software engineering.
+                </div>
+            </div>
+
+            <div class="education-card">
+                <div class="education-title">IBM Full Stack Developer Certificate</div>
+                <div class="institution">IBM Professional Program</div>
+                <div class="status">In Progress - Expected March 2025</div>
+                <div class="education-description">
+                    Comprehensive program covering React, Node.js, Python, databases, and cloud deployment.
+                </div>
+            </div>
+
+            <div class="education-card">
+                <div class="education-title">IBM AI Developer Certificate</div>
+                <div class="institution">IBM Professional Program</div>
+                <div class="status">In Progress - Expected March 2025</div>
+                <div class="education-description">
+                    Specialized training in AI development, ML model deployment, and NLP applications.
+                </div>
+            </div>
+
+            <div class="education-card">
+                <div class="education-title">Military Leadership Training</div>
+                <div class="institution">United States Marine Corps</div>
+                <div class="status">Honorable Service</div>
+                <div class="education-description">
+                    Leadership development, team coordination, and operational excellence principles.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Additional Information -->
+    <section class="section">
+        <h2 class="section-title">// Additional Information</h2>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+            <div>
+                <h4 style="color: var(--accent-blue); margin-bottom: 0.5rem; font-family: var(--font-mono);">Languages</h4>
+                <p style="color: var(--text-secondary);">English (Native), Spanish (Fluent), Portuguese (Intermediate)</p>
+
+                <h4 style="color: var(--accent-blue); margin: 1rem 0 0.5rem; font-family: var(--font-mono);">Open Source</h4>
+                <p style="color: var(--text-secondary);">Active contributor with 50K+ downloads across developer tools and testing frameworks</p>
+            </div>
+
+            <div>
+                <h4 style="color: var(--accent-blue); margin-bottom: 0.5rem; font-family: var(--font-mono);">Location</h4>
+                <p style="color: var(--text-secondary);">New Orleans, LA | Butler, PA | Available for remote opportunities worldwide</p>
+
+                <h4 style="color: var(--accent-blue); margin: 1rem 0 0.5rem; font-family: var(--font-mono);">Philosophy</h4>
+                <p style="color: var(--text-secondary); font-style: italic;">"Being a hyperglot allows me to use the right tool for the right job."</p>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>
