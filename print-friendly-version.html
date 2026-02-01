@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oscar Rieken - Principal SDET Resume</title>
+    <style>
+        /* Print-optimized styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 11pt;
+            line-height: 1.4;
+            color: #000;
+            background: #fff;
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 0.5in;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 20pt;
+            border-bottom: 2pt solid #000;
+            padding-bottom: 12pt;
+        }
+
+        .name {
+            font-size: 18pt;
+            font-weight: bold;
+            margin-bottom: 6pt;
+            letter-spacing: 1pt;
+        }
+
+        .title {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-bottom: 8pt;
+        }
+
+        .contact {
+            font-size: 10pt;
+            line-height: 1.3;
+        }
+
+        .contact-line {
+            margin-bottom: 2pt;
+        }
+
+        /* Section Headers */
+        .section {
+            margin-bottom: 16pt;
+        }
+
+        .section-title {
+            font-size: 12pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5pt;
+            border-bottom: 1pt solid #000;
+            padding-bottom: 2pt;
+            margin-bottom: 8pt;
+        }
+
+        /* Professional Summary */
+        .summary {
+            font-size: 11pt;
+            text-align: justify;
+            margin-bottom: 12pt;
+        }
+
+        /* Experience */
+        .job {
+            margin-bottom: 14pt;
+            page-break-inside: avoid;
+        }
+
+        .job-header {
+            margin-bottom: 4pt;
+        }
+
+        .job-title {
+            font-size: 11pt;
+            font-weight: bold;
+        }
+
+        .company {
+            font-size: 11pt;
+            font-weight: bold;
+        }
+
+        .job-meta {
+            font-size: 10pt;
+            font-style: italic;
+            margin-bottom: 6pt;
+        }
+
+        .job-description {
+            font-size: 10pt;
+            margin-bottom: 6pt;
+            text-align: justify;
+        }
+
+        .highlights {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .highlights li {
+            margin-bottom: 3pt;
+            padding-left: 12pt;
+            position: relative;
+            font-size: 10pt;
+            text-align: justify;
+        }
+
+        .highlights li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        /* Skills */
+        .skills-section {
+            column-count: 2;
+            column-gap: 20pt;
+            column-rule: 1pt solid #ccc;
+        }
+
+        .skill-category {
+            break-inside: avoid;
+            margin-bottom: 10pt;
+        }
+
+        .skill-category h4 {
+            font-size: 11pt;
+            font-weight: bold;
+            margin-bottom: 4pt;
+            border-bottom: 0.5pt solid #666;
+            padding-bottom: 1pt;
+        }
+
+        .skill-list {
+            font-size: 10pt;
+            line-height: 1.3;
+        }
+
+        /* Education */
+        .education-item {
+            margin-bottom: 8pt;
+        }
+
+        .education-item h4 {
+            font-size: 11pt;
+            font-weight: bold;
+            margin-bottom: 2pt;
+        }
+
+        .institution {
+            font-size: 10pt;
+            font-style: italic;
+        }
+
+        .status {
+            font-size: 10pt;
+            color: #666;
+        }
+
+        /* Two-column layout for certain sections */
+        .two-column {
+            column-count: 2;
+            column-gap: 20pt;
+            column-rule: 1pt solid #ccc;
+        }
+
+        .two-column .item {
+            break-inside: avoid;
+            margin-bottom: 8pt;
+        }
+
+        /* Print-specific styles */
+        @media print {
+            body {
+                font-size: 10pt;
+                margin: 0;
+                padding: 0.4in;
+            }
+
+            .page-break {
+                page-break-before: always;
+            }
+
+            .no-break {
+                page-break-inside: avoid;
+            }
+        }
+
+        /* Ensure black text for printing */
+        @media print {
+            * {
+                color: #000 !important;
+                background: #fff !important;
+            }
+        }
+    </style>
+</head>
+<body>
+<button class="print-button no-print" onclick="window.print()">🖨️ Print Resume</button>
+<!-- Header -->
+<header class="header">
+    <h1 class="name">OSCAR RIEKEN</h1>
+    <div class="title">Principal SDET | Test Automation Architect | CI/CD Specialist</div>
+    <div class="contact">
+        <div class="contact-line">New Orleans, LA | Butler, PA</div>
+        <div class="contact-line">oriekenjr@gmail.com | +1 504 723 4720</div>
+        <div class="contact-line">LinkedIn: linkedin.com/in/oscarrieken | GitHub: github.com/oscarrieken</div>
+    </div>
+</header>
+
+<!-- Professional Summary -->
+<section class="section">
+    <h2 class="section-title">Professional Summary</h2>
+    <p class="summary">
+        Principal SDET and Test Automation Architect with 18+ years of experience building scalable testing frameworks and leading CI/CD transformations. Expert in Playwright, Selenium, and Cypress with proven track record of mentoring 90+ development teams and reducing deployment cycles by 60% through innovative automation strategies. Specialized in enterprise-scale quality assurance, accessibility testing, and cross-browser automation solutions.
+    </p>
+</section>
+
+<!-- Core Competencies -->
+<section class="section">
+    <h2 class="section-title">Core Competencies</h2>
+    <div class="skills-section">
+        <div class="skill-category">
+            <h4>Test Automation Frameworks</h4>
+            <div class="skill-list">
+                Playwright (Expert), Selenium WebDriver (10+ years), Cypress (Expert), TestNG, JUnit, Cucumber, Jest, Mocha
+            </div>
+        </div>
+        <div class="skill-category">
+            <h4>Programming Languages</h4>
+            <div class="skill-list">
+                JavaScript/TypeScript (10+ years), Python, Java, Ruby (10+ years), Go, C#
+            </div>
+        </div>
+        <div class="skill-category">
+            <h4>CI/CD & DevOps</h4>
+            <div class="skill-list">
+                Jenkins, GitHub Actions, GitLab CI, Docker, Kubernetes, AWS, Azure, Terraform
+            </div>
+        </div>
+        <div class="skill-category">
+            <h4>Quality Assurance</h4>
+            <div class="skill-list">
+                Accessibility Testing (WCAG), Cross-browser Testing, Performance Testing, API Testing, Visual Regression Testing
+            </div>
+        </div>
+        <div class="skill-category">
+            <h4>Tools & Technologies</h4>
+            <div class="skill-list">
+                Git, JIRA, SonarQube, BrowserStack, Sauce Labs, Grafana, Prometheus, Slack/Teams Integration
+            </div>
+        </div>
+        <div class="skill-category">
+            <h4>Leadership & Methodology</h4>
+            <div class="skill-list">
+                Agile/Scrum, Test Strategy, Team Mentoring, Framework Architecture, Risk-based Testing
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Professional Experience -->
+<section class="section">
+    <h2 class="section-title">Professional Experience</h2>
+
+    <div class="job no-break">
+        <div class="job-header">
+            <div class="job-title">Principal Software Development Engineer in Test (SDET)</div>
+            <div class="company">Rieken Consulting</div>
+            <div class="job-meta">August 2023 - Present | Remote</div>
+        </div>
+        <div class="job-description">
+            Lead SDET consultant specializing in test automation framework development, CI/CD optimization, and enterprise testing strategy implementation for Fortune 500 clients.
+        </div>
+        <ul class="highlights">
+            <li>Architected and implemented custom Playwright testing frameworks for 7 enterprise development teams, resulting in 70% reduction in test execution time</li>
+            <li>Developed comprehensive CI/CD pipelines integrating automated testing, code quality gates, and deployment automation using Jenkins and GitHub Actions</li>
+            <li>Built unified test reporting dashboards with real-time analytics using Grafana and Prometheus, improving defect detection by 85%</li>
+            <li>Created advanced training curricula and SDET playbooks, successfully upskilling 25+ manual testers to automation specialists</li>
+            <li>Implemented cross-browser testing strategies across Chrome, Firefox, Safari, and Edge, ensuring 99.5% compatibility coverage</li>
+            <li>Established accessibility testing automation using Playwright + Axe integration, achieving WCAG 2.1 AA compliance</li>
+        </ul>
+    </div>
+
+    <div class="job no-break">
+        <div class="job-header">
+            <div class="job-title">Principal Software Development Engineer in Test</div>
+            <div class="company">ADP</div>
+            <div class="job-meta">June 2016 - August 2023 | Alpharetta, GA</div>
+        </div>
+        <div class="job-description">
+            Principal Software Architect for MyADP Product ecosystem, driving Continuous Delivery adoption and quality engineering transformation across 90+ product teams.
+        </div>
+        <ul class="highlights">
+            <li>Led enterprise-wide migration from Protractor to Cypress and Playwright frameworks, improving test reliability by 90% and reducing maintenance overhead by 50%</li>
+            <li>Influenced quality practices across 90+ product teams, establishing standardized testing metrics and automation guidelines</li>
+            <li>Implemented comprehensive accessibility testing strategy using Playwright + Axe, contributing to ADP mobile applications achieving top 5 business app rankings on iOS and Android</li>
+            <li>Developed WebEx bot integration for automated deployment triggers and Jenkins-based build radiators, improving deployment visibility and accountability</li>
+            <li>Mentored 12 SDETs directly and 90+ team members indirectly, establishing career development paths and technical excellence standards</li>
+            <li>Created custom hiring processes including technical challenges and pair programming interviews, improving SDET hire quality by 80%</li>
+            <li>Integrated SonarQube, ESLint, and Danger tools into CI/CD pipelines, establishing team-wide code quality gates</li>
+        </ul>
+    </div>
+
+    <div class="job no-break">
+        <div class="job-header">
+            <div class="job-title">Lead Software Engineer</div>
+            <div class="company">The Home Depot</div>
+            <div class="job-meta">June 2015 - March 2017 | Vinings, GA</div>
+        </div>
+        <div class="job-description">
+            Technical lead for AngularJS migration and test automation implementation across multiple development teams.
+        </div>
+        <ul class="highlights">
+            <li>Led 5 engineers through TDD/BDD adoption and migration from proprietary JavaScript framework to AngularJS</li>
+            <li>Established comprehensive test automation strategy combining unit, integration, and end-to-end testing approaches</li>
+            <li>Developed custom automation frameworks and delivered weekly training programs on testing best practices</li>
+            <li>Created real-time dashboards for test coverage tracking and quality metrics visualization</li>
+        </ul>
+    </div>
+
+    <div class="job no-break">
+        <div class="job-header">
+            <div class="job-title">Lead Software Engineer in Test</div>
+            <div class="company">IONIC Security</div>
+            <div class="job-meta">April 2014 - June 2015 | Atlanta, GA</div>
+        </div>
+        <ul class="highlights">
+            <li>Built greenfield test automation framework from scratch supporting web and API testing</li>
+            <li>Introduced infrastructure automation using Packer, Docker, and Vagrant for consistent test environments</li>
+            <li>Led team of 5 automation engineers and aligned development/QA sprint cadences</li>
+        </ul>
+    </div>
+
+    <div class="job no-break">
+        <div class="job-header">
+            <div class="job-title">Lead Quality Assurance Analyst</div>
+            <div class="company">Manheim</div>
+            <div class="job-meta">January 2012 - April 2014 | Atlanta, GA</div>
+        </div>
+        <ul class="highlights">
+            <li>Managed 15 automation engineers across onshore, offshore, and nearshore teams</li>
+            <li>Built comprehensive functional and performance testing frameworks supporting browser and mobile platforms</li>
+            <li>Developed Ruby-based technical assessments and successfully transitioned manual testers to automation roles</li>
+        </ul>
+    </div>
+
+    <div class="job no-break">
+        <div class="job-header">
+            <div class="job-title">Lead Quality Assurance Analyst</div>
+            <div class="company">ThoughtWorks</div>
+            <div class="job-meta">July 2006 - December 2011 | Global</div>
+        </div>
+        <ul class="highlights">
+            <li>Built foundational automation frameworks and created open-source plugins for Watir and Selenium-WebDriver</li>
+            <li>Led QA initiatives across multiple agile teams with focus on integration and performance testing</li>
+            <li>Established project-specific testing templates and automated regression testing standards</li>
+        </ul>
+    </div>
+</section>
+
+<!-- Key Achievements -->
+<section class="section">
+    <h2 class="section-title">Key Achievements</h2>
+    <div class="two-column">
+        <div class="item">
+            <strong>Enterprise Transformation:</strong> Successfully transformed 90+ product teams to modern automation practices, reducing deployment time by 60% across ADP's ecosystem.
+        </div>
+        <div class="item">
+            <strong>Mobile App Success:</strong> Accessibility testing implementation contributed to ADP mobile apps reaching top 5 business applications on both Android and iOS platforms.
+        </div>
+        <div class="item">
+            <strong>Framework Innovation:</strong> Created reusable testing frameworks adopted by multiple Fortune 500 companies, improving industry testing standards.
+        </div>
+        <div class="item">
+            <strong>Team Development:</strong> Mentored 90+ teams and 12 direct SDETs, establishing industry-leading SDET development programs and career progression paths.
+        </div>
+    </div>
+</section>
+
+<!-- Education & Certifications -->
+<section class="section">
+    <h2 class="section-title">Education & Certifications</h2>
+    <div class="education-item">
+        <h4>Master's Degree - Machine Learning & Artificial Intelligence</h4>
+        <div class="institution">Heriot-Watt University</div>
+        <div class="status">In Progress - Expected Completion: 2025</div>
+    </div>
+    <div class="education-item">
+        <h4>IBM Full Stack Software Developer Professional Certificate</h4>
+        <div class="institution">IBM</div>
+        <div class="status">In Progress - Expected Completion: March 2025</div>
+    </div>
+    <div class="education-item">
+        <h4>IBM AI Developer Professional Certificate</h4>
+        <div class="institution">IBM</div>
+        <div class="status">In Progress - Expected Completion: March 2025</div>
+    </div>
+</section>
+
+<!-- Additional Information -->
+<section class="section">
+    <h2 class="section-title">Additional Information</h2>
+    <div class="two-column">
+        <div class="item">
+            <strong>Languages:</strong> Spanish (Fluent), Portuguese (Intermediate)
+        </div>
+        <div class="item">
+            <strong>Military Service:</strong> United States Marine Corps
+        </div>
+        <div class="item">
+            <strong>Open Source:</strong> Active contributor to testing framework libraries and automation tools
+        </div>
+        <div class="item">
+            <strong>Speaking:</strong> Regular presenter at testing conferences and technical meetups
+        </div>
+    </div>
+</section>
+</body>
+</html>

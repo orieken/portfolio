@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oscar Rieken - AI Engineer Infographic Resume</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .resume-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        /* Header Section */
+        .header {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="ai-pattern" patternUnits="userSpaceOnUse" width="50" height="50"><circle cx="12" cy="12" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="37" cy="37" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="12" cy="37" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="37" cy="12" r="1" fill="rgba(255,255,255,0.05)"/><path d="M20,20 L30,30 M30,20 L20,30" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23ai-pattern)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .name {
+            font-size: 3.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #fff, #f8f9fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            font-size: 1.4em;
+            margin-bottom: 20px;
+            color: #f8f9fa;
+            font-weight: 300;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.1em;
+        }
+
+        .contact-icon {
+            width: 20px;
+            height: 20px;
+            fill: #f39c12;
+        }
+
+        /* AI Stats Section */
+        .stats-section {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            padding: 40px;
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 30px 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #f39c12, #e74c3c);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .stat-number {
+            font-size: 3em;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 10px;
+            line-height: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .stat-label {
+            font-size: 1.1em;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+
+        .left-column {
+            background: #f8f9fa;
+            padding: 40px;
+        }
+
+        .right-column {
+            background: white;
+            padding: 40px;
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, #e74c3c, #f39c12);
+            border-radius: 2px;
+        }
+
+        /* AI Skills Section */
+        .skills-category {
+            margin-bottom: 30px;
+        }
+
+        .skills-category h4 {
+            font-size: 1.3em;
+            color: #34495e;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .skill-icon {
+            width: 24px;
+            height: 24px;
+            fill: #e74c3c;
+        }
+
+        .skill-bars {
+            space-y: 12px;
+        }
+
+        .skill-bar {
+            margin-bottom: 12px;
+        }
+
+        .skill-name {
+            font-size: 1em;
+            color: #2c3e50;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .skill-years {
+            font-size: 0.8em;
+            color: #7f8c8d;
+            background: #ecf0f1;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+
+        .skill-years.ai-expert {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .skill-years.ai-proficient {
+            background: #f39c12;
+            color: white;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #ecf0f1;
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #e74c3c, #f39c12);
+            border-radius: 4px;
+            transition: width 2s ease;
+            position: relative;
+        }
+
+        .progress-fill.ai-expert {
+            background: linear-gradient(90deg, #e74c3c, #c0392b);
+        }
+
+        .progress-fill.ai-proficient {
+            background: linear-gradient(90deg, #f39c12, #e67e22);
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #e74c3c, #f39c12);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-left: 20px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 25px;
+            width: 12px;
+            height: 12px;
+            background: #e74c3c;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #e74c3c;
+        }
+
+        .timeline-item.ai-focused::before {
+            background: #f39c12;
+            box-shadow: 0 0 0 3px #f39c12;
+        }
+
+        .job-title-timeline {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .company-timeline {
+            color: #e74c3c;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .date-timeline {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        .job-highlights {
+            list-style: none;
+            margin-top: 10px;
+        }
+
+        .job-highlights li {
+            margin-bottom: 5px;
+            padding-left: 15px;
+            position: relative;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .job-highlights li::before {
+            content: '🔹';
+            position: absolute;
+            left: 0;
+            font-size: 0.8em;
+        }
+
+        .job-highlights li.ai-highlight::before {
+            content: '🤖';
+        }
+
+        /* AI Innovation Showcase */
+        .innovation-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .innovation-card {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .innovation-card.ml-focus {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+        }
+
+        .innovation-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .innovation-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .innovation-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .innovation-desc {
+            font-size: 0.9em;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
+        /* AI Achievements */
+        .achievement-item {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .achievement-item.ml-achievement {
+            background: linear-gradient(135deg, #00b894 0%, #00a085 100%);
+        }
+
+        .achievement-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="3" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="80" r="3" fill="rgba(255,255,255,0.1)"/><circle cx="20" cy="80" r="2" fill="rgba(255,255,255,0.05)"/><circle cx="80" cy="20" r="2" fill="rgba(255,255,255,0.05)"/><path d="M15,15 Q50,5 85,85" stroke="rgba(255,255,255,0.1)" stroke-width="2" fill="none"/></svg>');
+            background-size: 40px 40px;
+            opacity: 0.3;
+        }
+
+        .achievement-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .achievement-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .achievement-desc {
+            font-size: 0.9em;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
+        /* Education */
+        .education-item {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            position: relative;
+            transition: all 0.3s ease;
+            border-left: 4px solid #e74c3c;
+        }
+
+        .education-item:hover {
+            box-shadow: 0 5px 20px rgba(231, 76, 60, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .education-title {
+            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .education-school {
+            color: #d63031;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .education-status {
+            color: #636e72;
+            font-size: 0.9em;
+            font-style: italic;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .innovation-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .name {
+                font-size: 2.5em;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .resume-container {
+                margin: 10px;
+                border-radius: 10px;
+            }
+
+            body {
+                padding: 10px;
+            }
+        }
+    
+        /* Back Navigation */
+        .back-nav {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(26, 26, 46, 0.9);
+            backdrop-filter: blur(10px);
+            color: #ffffff;
+            padding: 12px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-btn:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-color: transparent;
+            transform: translateX(-5px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .back-btn svg {
+            flex-shrink: 0;
+        }
+
+
+    </style>
+</head>
+<body>
+<!-- Back to Portfolio Navigation -->
+<nav class="back-nav">
+    <a href="../index.html" class="back-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        <span>Back to Portfolio</span>
+    </a>
+</nav>
+
+
+<div class="resume-container">
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <h1 class="name">Oscar Rieken</h1>
+            <p class="tagline">AI Engineer | ML/RAG Specialist | Intelligent Automation Architect</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <svg class="contact-icon" viewBox="0 0 24 24">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                    </svg>
+                    New Orleans, LA | Butler, PA
+                </div>
+                <div class="contact-item">
+                    <svg class="contact-icon" viewBox="0 0 24 24">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                    oriekenjr@gmail.com
+                </div>
+                <div class="contact-item">
+                    <svg class="contact-icon" viewBox="0 0 24 24">
+                        <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                    </svg>
+                    +1 504 723 4720
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- AI Stats Section -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">18+</div>
+                <div class="stat-label">Years Engineering</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">5+</div>
+                <div class="stat-label">AI/ML Projects</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">95%</div>
+                <div class="stat-label">ML Model Accuracy</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">10K+</div>
+                <div class="stat-label">Daily ML Predictions</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Left Column -->
+        <div class="left-column">
+            <!-- AI/ML Skills -->
+            <section>
+                <h2 class="section-title">AI/ML Technical Skills</h2>
+
+                <div class="skills-category">
+                    <h4>
+                        <svg class="skill-icon" viewBox="0 0 24 24">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                        Machine Learning & AI
+                    </h4>
+                    <div class="skill-bars">
+                        <div class="skill-bar">
+                            <div class="skill-name">
+                                RAG Models
+                                <span class="skill-years ai-expert">Expert</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill ai-expert" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-name">
+                                GPT/LLM Integration
+                                <span class="skill-years ai-expert">Expert</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill ai-expert" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-name">
+                                TensorFlow/PyTorch
+                                <span class="skill-years ai-proficient">Proficient</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill ai-proficient" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-name">
+                                Scikit-learn
+                                <span class="skill-years ai-proficient">Proficient</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill ai-proficient" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-name">
+                                Vector Databases
+                                <span class="skill-years ai-proficient">Proficient</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill ai-proficient" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skills-category">
+                    <h4>
+                        <svg class="skill-icon" viewBox="0 0 24 24">
+                            <path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0L19.2 12l-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/>
+                        </svg>
+                        Programming & Data Science
+                    </h4>
+                    <div class="skill-bars">
+                        <div class="skill-bar">
+                            <div class="skill-name">
+                                Python (AI/ML)
+                                <span class="skill-years ai-expert">Expert</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill ai-expert" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-name">
+                                JavaScript/TypeScript
+                                <span class="skill-years ai-expert">10+ years</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill ai-expert" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-name">
+                                R & Statistical Analysis
+                                <span class="skill-years ai-proficient">Proficient</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill ai-proficient" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-name">
+                                Pandas/NumPy
+                                <span class="skill-years ai-proficient">Proficient</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill ai-proficient" style="width: 85%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skills-category">
+                    <h4>
+                        <svg class="skill-icon" viewBox="0 0 24 24">
+                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+                        </svg>
+                        MLOps & Cloud
+                    </h4>
+                    <div class="skill-bars">
+                        <div class="skill-bar">
+                            <div class="skill-name">
+                                AWS (SageMaker)
+                                <span class="skill-years ai-expert">Expert</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill ai-expert" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-name">
+                                Docker/Kubernetes
+                                <span class="skill-years ai-proficient">Proficient</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill ai-proficient" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-name">
+                                MLflow/Kubeflow
+                                <span class="skill-years ai-proficient">Proficient</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill ai-proficient" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Innovations -->
+            <section style="margin-top: 30px;">
+                <h2 class="section-title">AI/ML Innovations</h2>
+                <div class="innovation-grid">
+                    <div class="innovation-card">
+                        <span class="innovation-icon">🤖</span>
+                        <div class="innovation-title">RAG-Powered Intelligence</div>
+                        <div class="innovation-desc">Production ML system with 95% accuracy in automated failure analysis</div>
+                    </div>
+                    <div class="innovation-card ml-focus">
+                        <span class="innovation-icon">🧠</span>
+                        <div class="innovation-title">GPT Integration</div>
+                        <div class="innovation-desc">Real-time AI dashboard with natural language insights</div>
+                    </div>
+                    <div class="innovation-card">
+                        <span class="innovation-icon">📊</span>
+                        <div class="innovation-title">Predictive Analytics</div>
+                        <div class="innovation-desc">ML models predicting performance issues with 90%+ accuracy</div>
+                    </div>
+                    <div class="innovation-card ml-focus">
+                        <span class="innovation-icon">🔍</span>
+                        <div class="innovation-title">Computer Vision</div>
+                        <div class="innovation-desc">Self-healing test automation using CV and NLP techniques</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Education -->
+            <section style="margin-top: 30px;">
+                <h2 class="section-title">AI Education & Certifications</h2>
+                <div class="education-item">
+                    <div class="education-title">🎓 Master's - ML & AI</div>
+                    <div class="education-school">Heriot-Watt University</div>
+                    <div class="education-status">In Progress - 2025</div>
+                </div>
+                <div class="education-item">
+                    <div class="education-title">🔬 IBM AI Developer</div>
+                    <div class="education-school">IBM Professional Certificate</div>
+                    <div class="education-status">In Progress - March 2025</div>
+                </div>
+                <div class="education-item">
+                    <div class="education-title">💡 IBM Full Stack Developer</div>
+                    <div class="education-school">IBM Professional Certificate</div>
+                    <div class="education-status">In Progress - March 2025</div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Right Column -->
+        <div class="right-column">
+            <!-- Experience Timeline -->
+            <section>
+                <h2 class="section-title">AI Engineering Experience</h2>
+                <div class="timeline">
+                    <div class="timeline-item ai-focused">
+                        <div class="job-title-timeline">AI Engineer & Principal SDET</div>
+                        <div class="company-timeline">Rieken Consulting</div>
+                        <div class="date-timeline">August 2023 - Present</div>
+                        <ul class="job-highlights">
+                            <li class="ai-highlight">Built production RAG system processing 10K+ daily predictions</li>
+                            <li class="ai-highlight">Deployed ML models with 95% accuracy in failure prediction</li>
+                            <li class="ai-highlight">Integrated GPT-4 for automated root cause analysis</li>
+                            <li>Created real-time AI dashboards with Grafana and Prometheus</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item ai-focused">
+                        <div class="job-title-timeline">Principal Software Architect (AI Focus)</div>
+                        <div class="company-timeline">ADP</div>
+                        <div class="date-timeline">June 2016 - August 2023</div>
+                        <ul class="job-highlights">
+                            <li class="ai-highlight">Pioneered ML-driven test analytics reducing false positives by 80%</li>
+                            <li class="ai-highlight">Implemented computer vision for accessibility testing</li>
+                            <li>Influenced 90+ teams in AI-enhanced quality practices</li>
+                            <li>Led migration to intelligent automation frameworks</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="job-title-timeline">Lead Software Engineer</div>
+                        <div class="company-timeline">The Home Depot</div>
+                        <div class="date-timeline">June 2015 - March 2017</div>
+                        <ul class="job-highlights">
+                            <li>Developed data-driven testing and analytics frameworks</li>
+                            <li>Led 5 engineers in automated performance prediction</li>
+                            <li>Created predictive dashboards for quality metrics</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="job-title-timeline">Lead Software Engineer in Test</div>
+                        <div class="company-timeline">IONIC Security</div>
+                        <div class="date-timeline">April 2014 - June 2015</div>
+                        <ul class="job-highlights">
+                            <li>Built intelligent automation with self-monitoring capabilities</li>
+                            <li>Introduced infrastructure automation and analytics</li>
+                            <li>Led team in developing adaptive testing strategies</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="job-title-timeline">Lead QA Analyst</div>
+                        <div class="company-timeline">Manheim</div>
+                        <div class="date-timeline">January 2012 - April 2014</div>
+                        <ul class="job-highlights">
+                            <li>Managed 15 engineers with data analytics focus</li>
+                            <li>Built frameworks with performance prediction models</li>
+                            <li>Developed automated reporting and analysis tools</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="job-title-timeline">Lead QA Analyst</div>
+                        <div class="company-timeline">ThoughtWorks</div>
+                        <div class="date-timeline">July 2006 - December 2011</div>
+                        <ul class="job-highlights">
+                            <li>Built foundational frameworks with integrated analytics</li>
+                            <li>Created intelligent test optimization features</li>
+                            <li>Led data-driven quality and performance testing</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Achievements -->
+            <section style="margin-top: 30px;">
+                <h2 class="section-title">Key AI/ML Achievements</h2>
+
+                <div class="achievement-item">
+                    <div class="achievement-content">
+                        <div class="achievement-title">🏆 Production ML System</div>
+                        <div class="achievement-desc">Successfully deployed production RAG system processing 10,000+ daily test executions with 95% accuracy in failure prediction and automated root cause analysis.</div>
+                    </div>
+                </div>
+
+                <div class="achievement-item ml-achievement">
+                    <div class="achievement-content">
+                        <div class="achievement-title">🚀 AI-Enhanced Quality Metrics</div>
+                        <div class="achievement-desc">Implemented ML-driven quality prediction models that reduced production incidents by 60% and improved deployment confidence across 90+ teams.</div>
+                    </div>
+                </div>
+
+                <div class="achievement-item">
+                    <div class="achievement-content">
+                        <div class="achievement-title">💡 Computer Vision Integration</div>
+                        <div class="achievement-desc">Pioneered CV-based accessibility testing and self-healing automation, reducing manual intervention by 70% while improving test reliability.</div>
+                    </div>
+                </div>
+
+                <div class="achievement-item ml-achievement">
+                    <div class="achievement-content">
+                        <div class="achievement-title">🧠 Open Source AI Contributions</div>
+                        <div class="achievement-desc">Created and maintain ML testing frameworks and intelligent automation tools with 1,000+ GitHub stars, contributing to the AI/testing community.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Additional Info -->
+            <section style="margin-top: 30px;">
+                <h2 class="section-title">Additional Information</h2>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+                    <div style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); padding: 20px; border-radius: 12px; text-align: center;">
+                        <div style="font-size: 2em; margin-bottom: 10px;">🌎</div>
+                        <div style="font-weight: 600; color: #2c3e50; margin-bottom: 5px;">Languages</div>
+                        <div style="color: #555;">Spanish (Fluent)<br>Portuguese (Intermediate)</div>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); padding: 20px; border-radius: 12px; text-align: center;">
+                        <div style="font-size: 2em; margin-bottom: 10px;">🎖️</div>
+                        <div style="font-weight: 600; color: #2c3e50; margin-bottom: 5px;">Military Service</div>
+                        <div style="color: #555;">United States<br>Marine Corps</div>
+                    </div>
+                </div>
+
+                <!-- AI Philosophy -->
+                <div style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: white; padding: 25px; border-radius: 15px; margin-top: 20px; text-align: center; position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%); animation: float 6s ease-in-out infinite;"></div>
+                    <div style="position: relative; z-index: 1;">
+                        <div style="font-size: 1.3em; font-weight: 600; margin-bottom: 10px;">AI Engineering Philosophy</div>
+                        <div style="font-size: 1em; opacity: 0.9; line-height: 1.5;">"AI should augment human intelligence, not replace it. The best ML systems are those that make complex problems simple and empower teams to make better decisions faster."</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Footer Call-to-Action -->
+    <div style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: white; padding: 30px; text-align: center;">
+        <div style="font-size: 1.5em; font-weight: 600; margin-bottom: 10px;">Ready to Build the Future with AI?</div>
+        <div style="font-size: 1.1em; opacity: 0.9;">Let's discuss how machine learning can transform your business challenges into intelligent solutions.</div>
+    </div>
+</div>
+
+<script>
+  // Add smooth animations when elements come into view
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+
+        // Animate progress bars
+        if (entry.target.classList.contains('progress-fill')) {
+          entry.target.style.width = entry.target.getAttribute('data-width') || entry.target.style.width;
+        }
+      }
+    });
+  }, observerOptions);
+
+  // Initialize animations
+  document.addEventListener('DOMContentLoaded', () => {
+    // Set initial states
+    const animatedElements = document.querySelectorAll('.timeline-item, .stat-card, .innovation-card, .achievement-item');
+    animatedElements.forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'all 0.6s ease';
+      observer.observe(el);
+    });
+
+    // Animate skill bars
+    const progressBars = document.querySelectorAll('.progress-fill');
+    progressBars.forEach(bar => {
+      const width = bar.style.width;
+      bar.setAttribute('data-width', width);
+      bar.style.width = '0%';
+      bar.style.transition = 'width 2s ease';
+      observer.observe(bar);
+    });
+
+    // Add hover effects to timeline items
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    timelineItems.forEach(item => {
+      item.addEventListener('mouseenter', () => {
+        item.style.transform = 'translateX(5px)';
+        item.style.boxShadow = '0 10px 25px rgba(0,0,0,0.2)';
+      });
+
+      item.addEventListener('mouseleave', () => {
+        item.style.transform = 'translateX(0)';
+        item.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+      });
+    });
+
+    // Add special hover effects for AI-focused items
+    const aiFocusedItems = document.querySelectorAll('.ai-focused');
+    aiFocusedItems.forEach(item => {
+      item.addEventListener('mouseenter', () => {
+        item.style.background = 'linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%)';
+      });
+
+      item.addEventListener('mouseleave', () => {
+        item.style.background = 'white';
+      });
+    });
+  });
+</script>
+</body>
+</html>

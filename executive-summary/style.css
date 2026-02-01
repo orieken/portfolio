@@ -13,6 +13,43 @@ body {
     overflow-x: hidden;
 }
 
+/* Back Navigation */
+.back-nav {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+}
+
+.back-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(26, 54, 93, 0.95);
+    backdrop-filter: blur(10px);
+    color: #ffffff;
+    padding: 12px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    border: 1px solid rgba(183, 121, 31, 0.5);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.back-btn:hover {
+    background: linear-gradient(135deg, #b7791f 0%, #1a365d 100%);
+    border-color: #b7791f;
+    transform: translateX(-5px);
+    box-shadow: 0 6px 20px rgba(183, 121, 31, 0.4);
+}
+
+.back-btn svg {
+    flex-shrink: 0;
+}
+
+
 .resume-container {
     max-width: 1400px;
     margin: 0 auto;
